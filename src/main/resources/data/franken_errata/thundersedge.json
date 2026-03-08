@@ -122,6 +122,12 @@
         "source": "thunders_edge"
     },
     {
+        "itemCategory": "TECH",
+        "itemId": "proxima",
+        "undraftable": true,
+        "source": "thunders_edge"
+    },
+    {
         "itemCategory": "ABILITY",
         "itemId": "phoenixstandard",
         "additionalComponents": [
@@ -140,6 +146,9 @@
         "itemId": "raisethestandard",
         "additionalComponents": [
             "ABILITY:galvanize"
+        ],
+        "optionalSwaps": [
+            "TECH:proxima"
         ],
         "source": "thunders_edge"
     },
@@ -193,6 +202,13 @@
         "undraftable": true,
         "source": "thunders_edge"
     },
+    {
+        "itemCategory": "STARTINGFLEET",
+        "itemId": "obsidian",
+        "undraftable": true,
+        "source": "thunders_edge"
+    },
+
     {
         "itemCategory": "PLOT",
         "itemId": "enervate",

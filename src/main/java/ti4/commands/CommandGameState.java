@@ -31,9 +31,7 @@ class CommandGameState {
         game.incrementSpecificSlashCommandCount(
                 event.getFullCommandName()); // TODO: This only works for commands that save...
 
-        if (!isPlayerCommand) {
-            return;
-        }
+        if (!isPlayerCommand) return;
         var player = CommandHelper.getPlayerFromEvent(game, event);
         if (player == null) {
             throw new IllegalArgumentException("Unable to determine player while attempting to run event "
@@ -47,6 +45,10 @@ class CommandGameState {
             Game game = CommandGameState.game.get();
             GameManager.save(game, EventAuditService.getReason(event, game.isFowMode()));
         }
+        clear();
+    }
+
+    void clear() {
         game.remove();
         player.remove();
     }

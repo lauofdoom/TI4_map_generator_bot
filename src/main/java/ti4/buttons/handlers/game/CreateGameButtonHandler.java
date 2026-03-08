@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.components.textinput.TextInput;
 import net.dv8tion.jda.api.components.textinput.TextInputStyle;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.Category;
+import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.modals.Modal;
@@ -37,6 +38,30 @@ public class CreateGameButtonHandler {
     @ButtonHandler("createGameChannels")
     @ButtonHandler("launchGame")
     public static void createGameChannelsButton(ButtonInteractionEvent event) {
+        List<Member> members = new ArrayList<>();
+        members.add(event.getMember());
+        Member member = event.getMember();
+
+        boolean owner = false;
+        if (event.getChannel() instanceof ThreadChannel threadChannel) {
+            if (threadChannel.getOwnerId().equals(member.getId())) {
+                owner = true;
+            }
+        }
+
+        int completedAndOngoingAmount =
+                SearchGameHelper.searchGames(member.getUser(), null, false, true, false, true, false, true, true, true);
+        if (completedAndOngoingAmount < 1 && !owner) {
+            MessageHelper.sendMessageToChannel(
+                    event.getMessageChannel(), member.getUser().getAsMention() + """
+                     You need to have completed at least one game (or be currently in a game) to create new games via this button. \
+                    This is to prevent mistakes by people who don't know what they're doing. There are a few ways to get around this:
+                    1) Have someone else who has completed a game press the button for you; or
+                    2) Ping a bothelper for help; or
+                    3) Have the player who made the post press the button.""");
+            return;
+        }
+
         createGameChannels(event);
     }
 
@@ -280,8 +305,7 @@ public class CreateGameButtonHandler {
         String gameName = CreateGameService.getNextGameName();
         String lastGameName = CreateGameService.getLastGameName();
 
-        boolean hasPbdGames = GameManager.getGameNames().stream().anyMatch(n -> n.startsWith("pbd"));
-        if (hasPbdGames && !GameManager.isValid(lastGameName)) {
+        if (!GameManager.isValid(lastGameName)) {
             BotLogger.error(
                     new LogOrigin(event),
                     "**Unable to create new games because the last game `" + lastGameName + "` cannot be found."
@@ -318,15 +342,6 @@ public class CreateGameButtonHandler {
                 if (gameOwner == null) gameOwner = member;
             }
         }
-
-        if (gameOwner == null) gameOwner = event.getMember();
-        if (gameOwner == null)
-            gameOwner = event.getGuild().getMemberById(event.getUser().getId());
-        if (gameOwner == null) {
-            MessageHelper.sendMessageToChannel(event.getChannel(), "Could not determine game owner. Please try again.");
-            return;
-        }
-        if (members.isEmpty()) members.add(gameOwner);
 
         if (isLikelyDoublePressedButton(gameName, members, lastGameName, event)
                 && !CommandHelper.hasRole(event, JdaService.bothelperRoles)
