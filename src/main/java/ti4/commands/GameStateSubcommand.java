@@ -36,7 +36,6 @@ public abstract class GameStateSubcommand extends Subcommand {
         commandGameState.postExecute(event);
     }
 
-
     @Override
     public void onException(SlashCommandInteractionEvent event, Throwable throwable) {
         commandGameState.clear();
