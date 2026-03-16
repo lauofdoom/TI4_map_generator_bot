@@ -75,6 +75,7 @@ import ti4.image.PositionMapper;
 import ti4.image.TileGenerator;
 import ti4.image.TileHelper;
 import ti4.listeners.annotations.ButtonHandler;
+import ti4.local.LocalConfig;
 import ti4.map.Game;
 import ti4.map.Leader;
 import ti4.map.Planet;
@@ -2329,7 +2330,10 @@ public class ButtonHelper {
             Game game,
             @Nullable Consumer<Message> onSuccess) {
         if (!AsyncTi4WebsiteHelper.uploadsEnabled() || game.isFowMode()) {
-            MessageHelper.sendFileToChannelAndAddLinkToButtons(channel, fileUpload, message, buttons, onSuccess);
+            // LOCAL: link "Open in browser" to the self-hosted web UI instead of the Discord CDN image
+            String webUrl = !game.isFowMode() ? LocalConfig.getWebBaseUrl() + game.getName() : null;
+            MessageHelper.sendFileToChannelAndAddLinkToButtons(
+                    channel, fileUpload, message, buttons, onSuccess, webUrl);
         } else {
             MessageHelper.sendFileToChannelWithButtonsAfter(channel, fileUpload, message, buttons, onSuccess);
         }

@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.components.buttons.ButtonStyle;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import org.apache.commons.lang3.StringUtils;
 import ti4.helpers.Constants;
+import ti4.local.LocalConfig;
 import ti4.map.Game;
 import ti4.message.logging.BotLogger;
 import ti4.service.emoji.CardEmojis;
@@ -110,7 +111,8 @@ public final class Buttons {
         List<Button> buttonsWeb = new ArrayList<>();
         if (game != null && !game.isFowMode()) {
             if (AsyncTi4WebsiteHelper.uploadsEnabled()) {
-                String url = "https://asyncti4.com/game/" + game.getName() + "/newui";
+                // LOCAL: replaced asyncti4.com URL with self-hosted web UI
+                String url = LocalConfig.getWebBaseUrl() + game.getName();
                 buttonsWeb.add(Button.link(url, "Website View"));
             }
             buttonsWeb.add(PLAYER_INFO);

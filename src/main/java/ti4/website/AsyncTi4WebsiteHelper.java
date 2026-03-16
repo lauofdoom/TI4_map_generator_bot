@@ -78,100 +78,92 @@ public class AsyncTi4WebsiteHelper {
         }
     }
 
+    // LOCAL: extracted from putPlayerData() so that PublicWebdataService can serve game state
+    // via REST without triggering a CDN upload. Must remain public.
+    public static Map<String, Object> buildWebData(String gameId, Game game) {
+        List<WebPlayerArea> playerDataList = new ArrayList<>();
+        for (Player player : game.getRealPlayersNNeutral()) {
+            playerDataList.add(WebPlayerArea.fromPlayer(player, game));
+        }
+
+        WebTilePositions webTilePositions = WebTilePositions.fromGame(game);
+        Map<String, WebTileUnitData> tileUnitData = WebTileUnitData.fromGame(game);
+        WebStatTilePositions webStatTilePositions = WebStatTilePositions.fromGame(game);
+        WebObjectives webObjectives = WebObjectives.fromGame(game);
+        WebCardPool webCardPool = WebCardPool.fromGame(game);
+        WebExpeditions webExpeditions = WebExpeditions.fromGame(game);
+        WebBorderAnomalies webBorderAnomalies = WebBorderAnomalies.fromGame(game);
+
+        Map<String, WebScoreBreakdown> playerScoreBreakdowns = new HashMap<>();
+        for (Player player : game.getRealPlayersNNeutral()) {
+            playerScoreBreakdowns.put(player.getFaction(), WebScoreBreakdown.fromPlayer(player, game));
+        }
+
+        List<WebLaw> lawsInPlay = new ArrayList<>();
+        for (Map.Entry<String, Integer> lawEntry : game.getLaws().entrySet()) {
+            lawsInPlay.add(WebLaw.fromGameLaw(lawEntry.getKey(), lawEntry.getValue(), game));
+        }
+
+        List<WebStrategyCard> strategyCards = new ArrayList<>();
+        for (Integer scNumber : game.getScTradeGoods().keySet()) {
+            if (scNumber == 0) continue;
+            strategyCards.add(WebStrategyCard.fromGameStrategyCard(scNumber, game));
+        }
+
+        Map<Integer, String> strategyCardIdMap = new HashMap<>();
+        var strategyCardSet = game.getStrategyCardSet();
+        if (strategyCardSet != null) {
+            for (var scModel : strategyCardSet.getStrategyCardModels()) {
+                strategyCardIdMap.put(scModel.getInitiative(), scModel.getId());
+            }
+        }
+
+        Map<String, Object> webData = new HashMap<>();
+        webData.put("versionSchema", 6);
+        webData.put("objectives", webObjectives);
+        webData.put("playerData", playerDataList);
+        webData.put("lawsInPlay", lawsInPlay);
+        webData.put("cardPool", webCardPool);
+        webData.put("strategyCards", strategyCards);
+        webData.put("strategyCardIdMap", strategyCardIdMap);
+        webData.put("scoreBreakdowns", playerScoreBreakdowns);
+        webData.put("tilePositions", webTilePositions.getTilePositions());
+        webData.put("tileUnitData", tileUnitData);
+        webData.put("statTilePositions", webStatTilePositions.getStatTilePositions());
+        webData.put("ringCount", game.getRingCount());
+        webData.put("vpsToWin", game.getVp());
+        webData.put("gameRound", game.getRound());
+        webData.put("gameName", game.getName());
+        webData.put("gameCustomName", game.getCustomName());
+        webData.put("tableTalkJumpLink", game.getTabletalkJumpLink());
+        webData.put("actionsJumpLink", game.getActionsJumpLink());
+        webData.put("expeditions", webExpeditions != null ? webExpeditions.getExpeditions() : null);
+        webData.put(
+                "borderAnomalies",
+                webBorderAnomalies.getBorderAnomalies() != null
+                                && !webBorderAnomalies.getBorderAnomalies().isEmpty()
+                        ? webBorderAnomalies.getBorderAnomalies()
+                        : null);
+        webData.put("isTwilightsFallMode", game.isTwilightsFallMode());
+        return webData;
+    }
+
     public static void putPlayerData(String gameId, Game game) {
         String bucket = EgressClientManager.getWebProperties().getProperty("website.bucket");
         boolean isDevMode = !uploadsEnabled() || bucket == null || bucket.isEmpty();
 
         try {
-            List<WebPlayerArea> playerDataList = new ArrayList<>();
-            for (Player player : game.getRealPlayersNNeutral()) {
-                playerDataList.add(WebPlayerArea.fromPlayer(player, game));
-            }
+            Map<String, Object> webData = buildWebData(gameId, game);
 
-            WebTilePositions webTilePositions = WebTilePositions.fromGame(game);
-            Map<String, WebTileUnitData> tileUnitData = WebTileUnitData.fromGame(game);
-            WebStatTilePositions webStatTilePositions = WebStatTilePositions.fromGame(game);
-            WebObjectives webObjectives = WebObjectives.fromGame(game);
-            WebCardPool webCardPool = WebCardPool.fromGame(game);
-            WebExpeditions webExpeditions = WebExpeditions.fromGame(game);
-            WebBorderAnomalies webBorderAnomalies = WebBorderAnomalies.fromGame(game);
+            if (!isDevMode) {
+                String json = JsonMapperManager.basic().writeValueAsString(webData);
 
-            // Create score breakdowns for each player
-            Map<String, WebScoreBreakdown> playerScoreBreakdowns = new HashMap<>();
-            for (Player player : game.getRealPlayersNNeutral()) {
-                playerScoreBreakdowns.put(player.getFaction(), WebScoreBreakdown.fromPlayer(player, game));
-            }
-
-            // Create laws with metadata
-            List<WebLaw> lawsInPlay = new ArrayList<>();
-            for (Map.Entry<String, Integer> lawEntry : game.getLaws().entrySet()) {
-                WebLaw webLaw = WebLaw.fromGameLaw(lawEntry.getKey(), lawEntry.getValue(), game);
-                lawsInPlay.add(webLaw);
-            }
-
-            // Create strategy cards with trade goods and pick status
-            List<WebStrategyCard> strategyCards = new ArrayList<>();
-            for (Integer scNumber : game.getScTradeGoods().keySet()) {
-                if (scNumber == 0) continue; // Skip the special "0" SC (Naalu's zero token)
-                WebStrategyCard webSC = WebStrategyCard.fromGameStrategyCard(scNumber, game);
-                strategyCards.add(webSC);
-            }
-
-            // Create map of initiative -> strategy card ID
-            Map<Integer, String> strategyCardIdMap = new HashMap<>();
-            var strategyCardSet = game.getStrategyCardSet();
-            if (strategyCardSet != null) {
-                for (var scModel : strategyCardSet.getStrategyCardModels()) {
-                    strategyCardIdMap.put(scModel.getInitiative(), scModel.getId());
-                }
-            }
-
-            Map<String, Object> webData = new HashMap<>();
-            webData.put("versionSchema", 6);
-            webData.put("objectives", webObjectives);
-            webData.put("playerData", playerDataList);
-            webData.put("lawsInPlay", lawsInPlay);
-            webData.put("cardPool", webCardPool);
-            webData.put("strategyCards", strategyCards);
-            webData.put("strategyCardIdMap", strategyCardIdMap);
-            webData.put("scoreBreakdowns", playerScoreBreakdowns);
-            webData.put("tilePositions", webTilePositions.getTilePositions());
-            webData.put("tileUnitData", tileUnitData);
-            webData.put("statTilePositions", webStatTilePositions.getStatTilePositions());
-            webData.put("ringCount", game.getRingCount());
-            webData.put("vpsToWin", game.getVp());
-            webData.put("gameRound", game.getRound());
-            webData.put("gameName", game.getName());
-            webData.put("gameCustomName", game.getCustomName());
-            webData.put("tableTalkJumpLink", game.getTabletalkJumpLink());
-            webData.put("actionsJumpLink", game.getActionsJumpLink());
-            webData.put("expeditions", webExpeditions != null ? webExpeditions.getExpeditions() : null);
-            webData.put(
-                    "borderAnomalies",
-                    webBorderAnomalies.getBorderAnomalies() != null
-                                    && !webBorderAnomalies.getBorderAnomalies().isEmpty()
-                            ? webBorderAnomalies.getBorderAnomalies()
-                            : null);
-            webData.put("isTwilightsFallMode", game.isTwilightsFallMode());
-
-            String json = JsonMapperManager.basic().writeValueAsString(webData);
-
-            if (isDevMode) {
-                // Dev/local mode - print to console instead of uploading
-
-                // Uncomment if this is what you're into
-                // System.out.println("=== DEV MODE: Web Player Data for game " + gameId + " ===");
-                // System.out.println(json);
-                // System.out.println("=== END Web Player Data ===");
-            } else {
-                // Production mode - upload to S3
                 putObjectInBucket(
                         String.format("webdata/%s/%s.json", gameId, gameId),
                         AsyncRequestBody.fromString(json),
                         "application/json",
                         "no-cache, no-store, must-revalidate");
 
-                // Upload latest image name if available
                 try {
                     GameImageService gameImageService = SpringContext.getBean(GameImageService.class);
                     String latestImageName = gameImageService.getLatestMapImageName(game.getName());
@@ -188,9 +180,9 @@ public class AsyncTi4WebsiteHelper {
                 } catch (Exception e) {
                     BotLogger.error(new LogOrigin(game), "Could not upload latest image name to web server", e);
                 }
-
-                notifyGameRefreshWebsocket(gameId);
             }
+
+            notifyGameRefreshWebsocket(gameId);
         } catch (Exception e) {
             BotLogger.error(new LogOrigin(game), "Could not put data to web server", e);
         }

@@ -18,6 +18,7 @@ import ti4.helpers.Constants;
 import ti4.helpers.RegexHelper;
 import ti4.helpers.StringHelper;
 import ti4.helpers.TIGLHelper;
+import ti4.local.LocalConfig;
 import ti4.map.Game;
 import ti4.map.Player;
 import ti4.map.persistence.GameManager;
@@ -150,7 +151,9 @@ public class RematchService {
                 + "### __Other helpful commands:__\n"
                 + "> `/game replace` to replace a player in the game with a new one\n";
         MessageHelper.sendMessageToChannelAndPin(botThread, botGetStartedMessage);
-        MessageHelper.sendMessageToChannelAndPin(botThread, "Website Live Map: https://asyncti4.com/game/" + newName);
+        // LOCAL: replaced asyncti4.com URL with self-hosted web UI
+        MessageHelper.sendMessageToChannelAndPin(
+                botThread, "Website Live Map: " + LocalConfig.getWebBaseUrl() + newName);
 
         if (game.isCompetitiveTIGLGame()) TIGLHelper.initializeTIGLGame(newGame);
 

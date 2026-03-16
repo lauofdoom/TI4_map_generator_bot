@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import ti4.executors.ExecutorServiceManager;
 import ti4.helpers.Helper;
+import ti4.local.LocalConfig;
 import ti4.map.Game;
 import ti4.map.Player;
 import ti4.map.persistence.GameManager;
@@ -134,7 +135,9 @@ public class UserLeaveServerListener extends ListenerAdapter {
         Player player = game.getPlayer(user.getId());
 
         // HEADER
-        String websiteLink = String.format("[__[%s](https://asyncti4.com/game/%s)__]", game.getName(), game.getName());
+        // LOCAL: replaced asyncti4.com URL with self-hosted web UI
+        String websiteLink =
+                String.format("[__[%s](%s%s)__]", game.getName(), LocalConfig.getWebBaseUrl(), game.getName());
         String faction = player.getFactionEmoji();
         String tabletalkLink = String.format(
                 "[__[Tabletalk](%s)__]", game.getTableTalkChannel().getJumpUrl());

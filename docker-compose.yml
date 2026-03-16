@@ -1,6 +1,22 @@
-version: "3.9"
-
 services:
+  ti4-web:
+    build:
+      context: /mnt/user/appdata/ti4_web
+      dockerfile: Dockerfile
+    container_name: ti4-web
+    restart: unless-stopped
+    ports:
+      - "8272:80"
+    depends_on:
+      - asyncti4-bot
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   asyncti4-bot:
     build:
       context: .
@@ -10,6 +26,10 @@ services:
     command: ["${BOT_TOKEN}", "1479318931641733291", "901547041866526800"]
     environment:
       - DB_PATH=/app/data/
+      - WEB_BASE_URL=${WEB_BASE_URL}
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID}
+      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET}
+      - DISCORD_REDIRECT_URI=${DISCORD_REDIRECT_URI}
     volumes:
       - ./data:/app/data
       - ./data/games:/app/games

@@ -12,6 +12,8 @@ COPY src/test ./src/test
 COPY src/main/resources ./src/main/resources
 COPY src/main/java ./src/main/java
 
+ENV MAVEN_OPTS="-Xmx1g -XX:MaxMetaspaceSize=512m"
+
 RUN --mount=type=cache,target=/root/.m2 \
     mvn -B -ntp -DskipTests clean package
 

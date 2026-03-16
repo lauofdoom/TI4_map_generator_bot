@@ -19,6 +19,7 @@ import ti4.helpers.FoWHelper;
 import ti4.helpers.Helper;
 import ti4.helpers.Units.UnitState;
 import ti4.helpers.Units.UnitType;
+import ti4.local.LocalConfig;
 import ti4.map.Game;
 import ti4.map.Planet;
 import ti4.map.Player;
@@ -310,10 +311,9 @@ public class TacticalActionService {
         buttons.add(Buttons.blue(player.finChecker() + "ChooseDifferentDestination", "Activate a different system"));
         buttons.add(Buttons.red(player.finChecker() + "resetTacticalMovement", "Reset all unit movement"));
 
-        // Open desktop web UI at the active system (BETA)
+        // LOCAL: Open desktop web UI at the active system (BETA)
         if (!game.isFowMode()) {
-            String baseUrl = "https://asyncti4.com/game/" + game.getName();
-            String url = baseUrl + "/newui";
+            String url = LocalConfig.getWebBaseUrl() + game.getName();
             String target = game.getActiveSystem();
             if (target != null && !target.isEmpty()) {
                 url += "?targetPositionId=" + target;

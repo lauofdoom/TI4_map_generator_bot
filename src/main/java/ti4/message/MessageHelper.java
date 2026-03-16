@@ -409,6 +409,18 @@ public class MessageHelper {
             String message,
             List<Button> buttons,
             @Nullable Consumer<Message> onSuccess) {
+        sendFileToChannelAndAddLinkToButtons(channel, fileUpload, message, buttons, onSuccess, null);
+    }
+
+    // LOCAL: overloaded to accept an optional webUrl; when provided, the "Open in browser"
+    // button links to the self-hosted web UI instead of the raw Discord CDN attachment URL.
+    public static void sendFileToChannelAndAddLinkToButtons(
+            MessageChannel channel,
+            FileUpload fileUpload,
+            String message,
+            List<Button> buttons,
+            @Nullable Consumer<Message> onSuccess,
+            @Nullable String webUrl) {
         if (fileUpload == null) {
             BotLogger.error("FileUpload null");
             return;
@@ -420,7 +432,9 @@ public class MessageHelper {
                             if (onSuccess != null) {
                                 onSuccess.accept(msg);
                             }
-                            String link = msg.getAttachments().getFirst().getUrl();
+                            String link = webUrl != null
+                                    ? webUrl
+                                    : msg.getAttachments().getFirst().getUrl();
                             realButtons.add(Button.link(link, "Open in browser"));
                             realButtons.addAll(buttons);
                             splitAndSent(message, channel, null, realButtons);
