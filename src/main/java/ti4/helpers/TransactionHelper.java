@@ -48,7 +48,7 @@ import ti4.service.relic.SendRelicService;
 import ti4.service.transaction.SendPromissoryService;
 import ti4.settings.users.UserSettingsManager;
 
-public class TransactionHelper {
+public final class TransactionHelper {
 
     private static void acceptTransactionOffer(Player p1, Player p2, Game game, ButtonInteractionEvent event) {
         List<String> transactionItems = p1.getTransactionItemsWithPlayer(p2);
@@ -245,15 +245,17 @@ public class TransactionHelper {
                         amountToTransact = Integer.parseInt(furtherDetail);
                         trans.append("Send ")
                                 .append(amountToTransact)
-                                .append(" debt token" + (amountToTransact == 1 ? "" : "s")
-                                        + ", for their \"Debt Account\" pool");
+                                .append(" debt token")
+                                .append(amountToTransact == 1 ? "" : "s")
+                                .append(", for their \"Debt Account\" pool");
                     }
                     case "ClearDebt" -> {
                         amountToTransact = Integer.parseInt(furtherDetail);
                         trans.append("Clear ")
                                 .append(amountToTransact)
-                                .append(" debt token" + (amountToTransact == 1 ? "" : "s")
-                                        + ", from their \"Debt Account\" pool");
+                                .append(" debt token")
+                                .append(amountToTransact == 1 ? "" : "s")
+                                .append(", from their \"Debt Account\" pool");
                     }
                     case "shipOrders" ->
                         trans.append(Mapper.getRelic(furtherDetail).getName()).append(FactionEmojis.axis);
@@ -660,7 +662,7 @@ public class TransactionHelper {
         String message = player.getRepresentation() + ", please choose which player you wish to transact with.";
         if (game.isHiddenAgendaMode()
                 && game.getPhaseOfGame().toLowerCase().contains("agenda")
-                && !game.getStoredValue("executiveOrder").isEmpty()) {
+                && game.getStoredValue("executiveOrder").isEmpty()) {
             message = player.getRepresentation()
                     + ", this game is in Hidden Agenda mode, which does not allow transactions in the Agenda Phase.";
             MessageHelper.sendMessageToChannel(player.getCardsInfoThread(), message);

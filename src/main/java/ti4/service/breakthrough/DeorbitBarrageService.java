@@ -106,6 +106,9 @@ public class DeorbitBarrageService {
         String planet = buttonID.split("_")[1];
         int amount = Integer.parseInt(buttonID.split("_")[2]);
         Player p2 = game.getPlanetOwner(planet);
+        if (p2 == null) {
+            p2 = game.getPlayerFromColorOrFaction("neutral");
+        }
         String planetRep = Helper.getPlanetRepresentation(planet, game);
         MessageHelper.sendMessageToChannel(
                 event.getMessageChannel(),
@@ -137,7 +140,8 @@ public class DeorbitBarrageService {
                         "Assign Hit" + (hits == 1 ? "" : "s")));
                 MessageHelper.sendMessageToChannelWithButtons(
                         game.isFowMode() ? p2.getCorrectChannel() : event.getMessageChannel(),
-                        p2.getRepresentation() + ", please assign the hits" + (hits == 1 ? "" : "s") + ".",
+                        p2.getRepresentation() + ", please assign the hits" + (hits == 1 ? "" : "s")
+                                + ". Reminder that the player who did the barrage officially assigns the hits, but that you can sustain if they assign a hit to mechs. Ask them how they would like you to assign hits.",
                         buttons);
             }
             buttons = ButtonHelper.getExhaustButtonsWithTG(game, player, "res");

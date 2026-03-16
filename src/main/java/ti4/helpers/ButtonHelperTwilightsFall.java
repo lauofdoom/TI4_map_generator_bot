@@ -59,7 +59,7 @@ import ti4.service.milty.MiltyDraftTile;
 import ti4.service.turn.EndTurnService;
 import ti4.service.unit.AddUnitService;
 
-public class ButtonHelperTwilightsFall {
+public final class ButtonHelperTwilightsFall {
 
     public static boolean checkForQueuedSplicePick(Player privatePlayer, Game game) {
         Player player = privatePlayer;
@@ -118,7 +118,7 @@ public class ButtonHelperTwilightsFall {
         if (alreadyQueued.isEmpty()) {
             numQueued = 0;
         }
-        StringBuilder msg = new StringBuilder(player.getRepresentationNoPing() + " you have " + number
+        StringBuilder msg = new StringBuilder(player.getRepresentationNoPing() + " you have " + (number - 1)
                 + " people ahead of you to pick in this splice and so can queue " + number + " cards."
                 + " So far you have queued " + numQueued + " cards. ");
         if (numQueued > 0) {
@@ -246,7 +246,7 @@ public class ButtonHelperTwilightsFall {
             List<MiltyDraftTile> slice = bag.Contents.stream()
                     .map(i -> i instanceof TileDraftItem tile ? tile.getMiltyTile() : null)
                     .filter(Objects::nonNull)
-                    .collect(Collectors.toCollection(() -> new ArrayList<>()));
+                    .collect(Collectors.toCollection(ArrayList::new));
 
             Collections.shuffle(slice);
             if (slice.get(1).getTile().getPlanetUnitHolders().isEmpty()
@@ -312,7 +312,7 @@ public class ButtonHelperTwilightsFall {
 
         // Set draft position
         DraftItem draftPos = bag.getCategory(DraftCategory.DRAFTORDER).getFirst();
-        Integer draftNum = Integer.parseInt(draftPos.getItemId());
+        int draftNum = Integer.parseInt(draftPos.getItemId());
         draft.setPosition(draftNum);
         draft.setFaction(bag.getCategory(DraftCategory.HOMESYSTEM).getFirst().getItemId());
         if (draftNum == 1) game.setSpeaker(player);
@@ -769,8 +769,12 @@ public class ButtonHelperTwilightsFall {
                     sendPlayerSpliceOptions(game, participants.getFirst());
                 }
             } else {
-                MessageHelper.sendMessageToChannel(
-                        game.getMainGameChannel(), game.getPing() + ", the splice is complete.");
+                List<String> cards = getSpliceCards(game);
+                List<MessageEmbed> embeds = getSpliceEmbeds(game, type, cards, null);
+                MessageHelper.sendMessageToChannelWithEmbeds(
+                        game.getMainGameChannel(),
+                        game.getPing() + ", the splice is complete. The remaining splice cards were as follows",
+                        embeds);
                 if (!game.getStoredValue("endTurnWhenSpliceEnds").isEmpty()) {
                     Player p2 = game.getActivePlayer();
                     if (game.getStoredValue("endTurnWhenSpliceEnds").contains(p2.getFaction())) {

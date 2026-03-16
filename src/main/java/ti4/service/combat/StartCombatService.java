@@ -492,9 +492,23 @@ public class StartCombatService {
                     }
                 }
                 if (playersWithGF.size() > 1) {
+                    Player p1 = playersWithGF.get(0);
+                    Player p2 = playersWithGF.get(1);
+                    if (game.getActivePlayer() != null && playersWithGF.contains(game.getActivePlayer())) {
+                        p1 = game.getActivePlayer();
+                        if (p2 == p1) {
+                            p2 = playersWithGF.getFirst();
+                        }
+                    }
+                    for (Player player : playersWithGF) {
+                        if (player.getPlanets().contains(unitHolderName) && player != p1) {
+                            p2 = player;
+                        }
+                    }
+
                     Button automate = Buttons.green(
-                            "automateGroundCombat_" + playersWithGF.get(0).getFaction() + "_"
-                                    + playersWithGF.get(1).getFaction() + "_" + unitHolderName + "_unconfirmed",
+                            "automateGroundCombat_" + p1.getFaction() + "_" + p2.getFaction() + "_" + unitHolderName
+                                    + "_unconfirmed",
                             "Automate Combat For " + Helper.getPlanetRepresentation(unitHolderName, game));
                     autoButtons.add(automate);
                 }
@@ -539,55 +553,32 @@ public class StartCombatService {
             for (Player p : game.getRealPlayers()) {
                 // offer buttons for all crimson commander holders
                 offerRedGhostCommanderButtons(p, game, tile, event);
-                if (p.hasUnit("crimson_destroyer")) {
-                    List<Tile> destroyers = ButtonHelper.getTilesOfPlayersSpecificUnits(game, p, UnitType.Destroyer);
-                    boolean inRange = false;
-                    for (Tile tile2 : destroyers) {
-                        if (FoWHelper.getAdjacentTiles(game, tile.getPosition(), p, false, true)
-                                .contains(tile2.getPosition())) {
-                            inRange = true;
-                        }
-                    }
-                    if (inRange) {
-                        String msg = p.getRepresentation()
-                                + ", at the end of the combat, if your destroyer is still within or adjacent to the tile containing the combat, you may place an inactive Breach.";
-                        List<Button> buttons = new ArrayList<>();
-                        buttons.add(Buttons.green(
-                                p.getFinsFactionCheckerPrefix() + "placeInactiveBreach_" + tile.getPosition(),
-                                "Place Inactive Breach"));
-                        buttons.add(Buttons.red(p.getFinsFactionCheckerPrefix() + "deleteButtons", "Decline to place"));
-                        MessageHelper.sendMessageToChannel(p.getCorrectChannel(), msg, buttons);
-                    }
-                }
-                if (p.hasUnit("crimson_destroyer2")) {
-                    List<Tile> destroyers = ButtonHelper.getTilesOfPlayersSpecificUnits(game, p, UnitType.Destroyer);
-                    boolean inRange = false;
-                    for (String adjPos : FoWHelper.getAdjacentTiles(game, tile.getPosition(), p, false, true)) {
-                        for (Tile tile2 : destroyers) {
-                            if (FoWHelper.getAdjacentTiles(game, adjPos, p, false, true)
-                                    .contains(tile2.getPosition())) {
-                                inRange = true;
-                                break;
-                            }
-                        }
-                        if (inRange) {
-                            break;
-                        }
-                    }
 
-                    if (inRange) {
-                        String msg = p.getRepresentation()
-                                + ", at the end of the combat, if your destroyer is still in the active system or within 2 tiles away, you may place a Breach (active or inactive).";
-                        List<Button> buttons = new ArrayList<>();
-                        buttons.add(Buttons.green(
-                                p.getFinsFactionCheckerPrefix() + "placeBreach_" + tile.getPosition() + "_destroyer",
-                                "Place Active Breach"));
-                        buttons.add(Buttons.blue(
-                                p.getFinsFactionCheckerPrefix() + "placeInactiveBreach_" + tile.getPosition(),
-                                "Place Inactive Breach"));
-                        buttons.add(Buttons.red(p.getFinsFactionCheckerPrefix() + "deleteButtons", "Decline to place"));
-                        MessageHelper.sendMessageToChannel(p.getCorrectChannel(), msg, buttons);
-                    }
+                boolean inExileRange = FoWHelper.isTileInExileRange(game, tile, p);
+                if (inExileRange) {
+                    String msg = p.getRepresentation()
+                            + ", at the end of the combat, if your destroyer is still within or adjacent to the tile containing the combat, you may place an inactive Breach.";
+                    List<Button> buttons = new ArrayList<>();
+                    buttons.add(Buttons.green(
+                            p.getFinsFactionCheckerPrefix() + "placeInactiveBreach_" + tile.getPosition(),
+                            "Place Inactive Breach"));
+                    buttons.add(Buttons.red(p.getFinsFactionCheckerPrefix() + "deleteButtons", "Decline to place"));
+                    MessageHelper.sendMessageToChannel(p.getCorrectChannel(), msg, buttons);
+                }
+
+                boolean inUpgradedExileRange = FoWHelper.isTileInUpgradedExileRange(game, tile, p);
+                if (inUpgradedExileRange) {
+                    String msg = p.getRepresentation()
+                            + ", at the end of the combat, if your destroyer is still in the active system or within 2 tiles away, you may place a Breach (active or inactive).";
+                    List<Button> buttons = new ArrayList<>();
+                    buttons.add(Buttons.green(
+                            p.getFinsFactionCheckerPrefix() + "placeBreach_" + tile.getPosition() + "_destroyer",
+                            "Place Active Breach"));
+                    buttons.add(Buttons.blue(
+                            p.getFinsFactionCheckerPrefix() + "placeInactiveBreach_" + tile.getPosition(),
+                            "Place Inactive Breach"));
+                    buttons.add(Buttons.red(p.getFinsFactionCheckerPrefix() + "deleteButtons", "Decline to place"));
+                    MessageHelper.sendMessageToChannel(p.getCorrectChannel(), msg, buttons);
                 }
             }
         }
@@ -895,7 +886,7 @@ public class StartCombatService {
                         buttons.add(bountyButton);
                     }
                 }
-                if (buttons.size() > 0) {
+                if (!buttons.isEmpty()) {
                     buttons.add(Buttons.red("deleteButtons", "Delete These"));
                     MessageHelper.sendMessageToChannel(
                             player.getCardsInfoThread(),
@@ -1541,11 +1532,37 @@ public class StartCombatService {
                     "Resolve Sardakk Breakthrough (Upon Win)",
                     FactionEmojis.Sardakk));
         }
-        if (p1.hasUnit("pinktf_mech") && isGroundCombat) {
+        if (p1.hasUnit("pinktf_mech")
+                && isGroundCombat
+                && ButtonHelper.getTilesOfPlayersSpecificUnits(game, p1, UnitType.Mech)
+                        .contains(tile)) {
             buttons.add(Buttons.gray(
                     p1.getFinsFactionCheckerPrefix() + "drawSingularNewSpliceCard_units_pinktfmech",
                     "Draw 1 Unit Upgrade (Upon Win)",
                     FactionEmojis.pinktf));
+        }
+
+        if (p1.hasUnit("orangetf_mech")
+                && isGroundCombat
+                && ButtonHelper.getTilesOfPlayersSpecificUnits(game, p1, UnitType.Mech)
+                        .contains(tile)
+                && p1.getStrategicCC() > 0) {
+            buttons.add(Buttons.gray(
+                    p1.getFinsFactionCheckerPrefix() + "orangeTFMechRepair",
+                    "Spend Strat CC to Repair Mechs",
+                    FactionEmojis.orangetf));
+        }
+
+        if (p2.hasUnit("orangetf_mech")
+                && isGroundCombat
+                && ButtonHelper.getTilesOfPlayersSpecificUnits(game, p2, UnitType.Mech)
+                        .contains(tile)
+                && p2.getStrategicCC() > 0
+                && !game.isFowMode()) {
+            buttons.add(Buttons.gray(
+                    p2.getFinsFactionCheckerPrefix() + "orangeTFMechRepair",
+                    "Spend Strat CC to Repair Mechs",
+                    FactionEmojis.orangetf));
         }
 
         if (p2.hasUnlockedBreakthrough("sardakkbt") && !game.isFowMode()) {
@@ -1554,7 +1571,11 @@ public class StartCombatService {
                     "Resolve Sardakk Breakthrough (Upon Win)",
                     FactionEmojis.Sardakk));
         }
-        if (p2.hasUnit("pinktf_mech") && isGroundCombat && !game.isFowMode()) {
+        if (p2.hasUnit("pinktf_mech")
+                && isGroundCombat
+                && !game.isFowMode()
+                && ButtonHelper.getTilesOfPlayersSpecificUnits(game, p2, UnitType.Mech)
+                        .contains(tile)) {
             buttons.add(Buttons.gray(
                     p2.getFinsFactionCheckerPrefix() + "drawSingularNewSpliceCard_units_pinktfmech",
                     "Draw 1 Unit Upgrade (Upon Win)",

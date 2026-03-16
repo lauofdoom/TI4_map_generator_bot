@@ -113,28 +113,63 @@ public class Player extends PlayerProperties {
     @Getter
     private final Game game;
 
+    @Setter
+    @Getter
     private DraftBag draftHand = new DraftBag();
+
+    @Setter
+    @Getter
     private DraftBag currentDraftBag = new DraftBag();
+
     private final DraftBag draftItemQueue = new DraftBag();
+
+    @Getter
     private List<Leader> leaders = new ArrayList<>();
+
+    @Getter
     private final List<TemporaryCombatModifierModel> newTempCombatModifiers = new ArrayList<>();
+
+    @Getter
     private List<TemporaryCombatModifierModel> tempCombatModifiers = new ArrayList<>();
 
     // TIGL
     private @Getter @Setter TIGLRank playerTIGLRankAtGameStart;
 
+    @Getter
     private final Tile nomboxTile = new Tile("nombox", "nombox");
 
+    @Getter
     private final Map<String, Integer> actionCards = new LinkedHashMap<>();
+
+    @Getter
     private final Map<String, Integer> events = new LinkedHashMap<>();
+
+    @Getter
     private final Map<String, Integer> trapCards = new LinkedHashMap<>();
+
+    @Getter
     private final Map<String, Integer> secrets = new LinkedHashMap<>();
+    /**
+     * -- GETTER --
+     *
+     * @return Map of (SecretObjectiveModel ID, Random Number ID)
+     */
+    @Getter
     private final Map<String, Integer> secretsScored = new LinkedHashMap<>();
+
+    @Getter
     private final Map<String, Integer> unitCaps = new HashMap<>();
+
+    @Getter
     private final Map<String, String> trapCardsPlanets = new LinkedHashMap<>();
+
     private final Map<String, String> fowSeenTiles = new HashMap<>();
     private final Map<String, String> fowCustomLabels = new HashMap<>();
+
+    @Setter
+    @Getter
     private Map<String, Integer> promissoryNotes = new LinkedHashMap<>();
+
     private @Getter Map<String, Integer> currentProducedUnits = new HashMap<>();
     // <pool: <color: count>>
     private final Map<String, Map<String, Integer>> debtTokens = new LinkedHashMap<>();
@@ -225,10 +260,6 @@ public class Player extends PlayerProperties {
         }
 
         return oceans;
-    }
-
-    public Tile getNomboxTile() {
-        return nomboxTile;
     }
 
     public UnitHolder getNombox() {
@@ -818,16 +849,8 @@ public class Player extends PlayerProperties {
         return unitCaps.get(unit);
     }
 
-    public Map<String, Integer> getUnitCaps() {
-        return unitCaps;
-    }
-
     public void setUnitCap(String unit, int cap) {
         unitCaps.put(unit, cap);
-    }
-
-    public Map<String, Integer> getActionCards() {
-        return actionCards;
     }
 
     @NotNull
@@ -850,10 +873,6 @@ public class Player extends PlayerProperties {
                 .filter(entry -> entry.getValue() == ActionCardHelper.ACStatus.garbozia)
                 .map(Entry::getKey)
                 .toList();
-    }
-
-    public Map<String, Integer> getEvents() {
-        return events;
     }
 
     public Map<String, Integer> getPlotCardsRaw() {
@@ -928,14 +947,6 @@ public class Player extends PlayerProperties {
     public List<String> getPuppetedFactionsForPlot(String plot) {
         List<String> puppets = getPlotCardsFactions().get(plot);
         return puppets == null ? List.of() : puppets;
-    }
-
-    public Map<String, Integer> getTrapCards() {
-        return trapCards;
-    }
-
-    public Map<String, String> getTrapCardsPlanets() {
-        return trapCardsPlanets;
     }
 
     public boolean hasTheZeroToken() {
@@ -1151,14 +1162,6 @@ public class Player extends PlayerProperties {
         promissoryNotes.put(id, identifier);
     }
 
-    public Map<String, Integer> getPromissoryNotes() {
-        return promissoryNotes;
-    }
-
-    public void setPromissoryNotes(Map<String, Integer> promissoryNotes) {
-        this.promissoryNotes = promissoryNotes;
-    }
-
     public void clearPromissoryNotes() {
         promissoryNotes.clear();
     }
@@ -1246,10 +1249,6 @@ public class Player extends PlayerProperties {
         return maxSOCount + Math.max(bonus, getBonusScoredSecrets());
     }
 
-    public Map<String, Integer> getSecrets() {
-        return secrets;
-    }
-
     public void setSecret(String id) {
         id = id.replace("extra1", "");
         id = id.replace("extra2", "");
@@ -1289,13 +1288,6 @@ public class Player extends PlayerProperties {
         idToRemove = idToRemove.replace("extra1", "");
         idToRemove = idToRemove.replace("extra2", "");
         return Mapper.getSecretObjective(idToRemove);
-    }
-
-    /**
-     * @return Map of (SecretObjectiveModel ID, Random Number ID)
-     */
-    public Map<String, Integer> getSecretsScored() {
-        return secretsScored;
     }
 
     public Map<String, Integer> getSecretsUnscored() {
@@ -1873,10 +1865,6 @@ public class Player extends PlayerProperties {
         return Optional.empty();
     }
 
-    public List<Leader> getLeaders() {
-        return leaders;
-    }
-
     public List<String> getLeaderIDs() {
         return leaders.stream().map(Leader::getId).toList();
     }
@@ -2264,22 +2252,6 @@ public class Player extends PlayerProperties {
                 .toList();
     }
 
-    public DraftBag getDraftHand() {
-        return draftHand;
-    }
-
-    public void setDraftHand(DraftBag hand) {
-        draftHand = hand;
-    }
-
-    public DraftBag getCurrentDraftBag() {
-        return currentDraftBag;
-    }
-
-    public void setCurrentDraftBag(DraftBag bag) {
-        currentDraftBag = bag;
-    }
-
     public DraftBag getDraftQueue() {
         return draftItemQueue;
     }
@@ -2568,29 +2540,6 @@ public class Player extends PlayerProperties {
             addOwnedUnitByID("tribune3");
             removeOwnedUnitByID("dreadnought2");
         }
-        Player obsidian = Helper.getPlayerFromAbility(game, "marionettes");
-        if (techModel.getFaction().isEmpty()
-                && obsidian != null
-                && !obsidian.is(this)
-                && obsidian.getPuppetedFactionsForPlot("extract").contains(getFaction())
-                && !obsidian.getTechs().contains(techID)) {
-            String msg = obsidian.getRepresentation() + ", _"
-                    + Mapper.getTech(techID).getName() + "_ has just been gained by " + getRepresentationNoPing()
-                    + ". Your _Extract_ plot card allows you to gain this technology for yourself by paying 4 resources.";
-
-            List<Button> buttons2 = new ArrayList<>();
-            buttons2.add(Buttons.green(
-                    "getTech_" + Mapper.getTech(techID).getAlias() + "__noPay",
-                    Mapper.getTech(techID).getName()));
-            buttons2.add(Buttons.red("deleteButtons", "Decline"));
-            MessageHelper.sendMessageToChannelWithButtons(obsidian.getCardsInfoThread(), msg, buttons2);
-            List<Button> buttons = ButtonHelper.getExhaustButtonsWithTG(game, obsidian, "res");
-            Button doneExhausting = Buttons.red("deleteButtons_spitItOut", "Done Exhausting Planets");
-            buttons.add(doneExhausting);
-            buttons.add(Buttons.red("deleteButtons", "Decline"));
-            MessageHelper.sendMessageToChannelWithButtons(
-                    obsidian.getCardsInfoThread(), "You can use these buttons to pay the 4 resources.", buttons);
-        }
     }
 
     // Provided because people make mistakes, also nekro exists, also weird homebrew exists
@@ -2833,7 +2782,7 @@ public class Player extends PlayerProperties {
     public Map<String, Integer> getDebtTokens(String pool) {
         Map<String, Integer> tokens = debtTokens.get(pool.toLowerCase());
         if (tokens == null) {
-            return new LinkedHashMap<String, Integer>();
+            return new LinkedHashMap<>();
         }
         return tokens;
     }
@@ -2853,7 +2802,7 @@ public class Player extends PlayerProperties {
     public void addDebtTokens(String tokenColor, int count, String pool) {
         pool = pool.toLowerCase();
         if (!debtTokens.containsKey(pool)) {
-            debtTokens.put(pool, new LinkedHashMap<String, Integer>());
+            debtTokens.put(pool, new LinkedHashMap<>());
         }
 
         if (debtTokens.get(pool).containsKey(tokenColor)) {
@@ -2997,14 +2946,6 @@ public class Player extends PlayerProperties {
             return false;
         }
         return getColor().equals(AliasHandler.resolveColor(unit.getColorID()));
-    }
-
-    public List<TemporaryCombatModifierModel> getNewTempCombatModifiers() {
-        return newTempCombatModifiers;
-    }
-
-    public List<TemporaryCombatModifierModel> getTempCombatModifiers() {
-        return tempCombatModifiers;
     }
 
     public boolean removeTempMod(TemporaryCombatModifierModel tempMod) {

@@ -508,7 +508,7 @@ public class ActionCardHelper {
         MessageHelper.sendMessageToChannelWithButtons(player.getCardsInfoThread(), msg, buttons);
     }
 
-    public static void sendSchemingDiscardButtons(Player player) {
+    private static void sendSchemingDiscardButtons(Player player) {
         List<Button> buttons = getDiscardActionCardButtons(player, false);
         String msg = player.getRepresentationUnfogged() + ", discard an action card due to **Scheming**.";
         MessageHelper.sendMessageToChannelWithButtons(player.getCardsInfoThread(), msg, buttons);
@@ -682,7 +682,7 @@ public class ActionCardHelper {
         if ("blackmarketdealing".equals(acID)
                 && game.getPhaseOfGame().toLowerCase().contains("agenda")
                 && game.isHiddenAgendaMode()
-                && !game.getStoredValue("executiveOrder").isEmpty()) {
+                && game.getStoredValue("executiveOrder").isEmpty()) {
             return "You cannot make transactions during the agenda phase in Hidden Agenda mode. Cancelling this action card automatically";
         }
 
@@ -1215,6 +1215,11 @@ public class ActionCardHelper {
 
             if ("oracle".equals(automationID)) {
                 codedButtons.add(Buttons.green(player.getFinsFactionCheckerPrefix() + "resolveOracle", buttonLabel));
+                MessageHelper.sendMessageToChannelWithButtons(channel2, introMsg, codedButtons);
+            }
+
+            if ("intrigue".equals(automationID)) {
+                codedButtons.add(Buttons.green(player.getFinsFactionCheckerPrefix() + "resolveIntrigue", buttonLabel));
                 MessageHelper.sendMessageToChannelWithButtons(channel2, introMsg, codedButtons);
             }
 
