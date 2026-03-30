@@ -13,6 +13,7 @@ import ti4.map.Game;
 import ti4.map.Player;
 import ti4.message.MessageHelper;
 import ti4.service.milty.MiltyService;
+import ti4.service.player.PlayerColorService;
 
 class Setup extends GameStateSubcommand {
 
@@ -49,9 +50,9 @@ class Setup extends GameStateSubcommand {
 
         Player player = getPlayer();
 
-        String color = AliasHandler.resolveColor(
-                event.getOption(Constants.COLOR, player.getNextAvailableColour(), OptionMapping::getAsString)
-                        .toLowerCase());
+        String eventColor = event.getOption(Constants.COLOR, OptionMapping::getAsString);
+        if (eventColor == null) eventColor = PlayerColorService.getPreferredColor(player);
+        String color = AliasHandler.resolveColor(eventColor.toLowerCase());
         if (!Mapper.isValidColor(color)) {
             MessageHelper.sendMessageToEventChannel(
                     event, "Color `" + color + "` is not valid. Options are: " + Mapper.getColors());

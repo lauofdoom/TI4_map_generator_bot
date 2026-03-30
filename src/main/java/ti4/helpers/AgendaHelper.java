@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.StringTokenizer;
 import javax.annotation.Nullable;
+import lombok.experimental.UtilityClass;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -74,6 +75,7 @@ import ti4.service.unit.AddUnitService;
 import ti4.service.unit.CheckUnitContainmentService;
 import ti4.service.unit.DestroyUnitService;
 
+@UtilityClass
 public final class AgendaHelper {
 
     private static void offerEveryonePrepassOnShenanigans(Game game) {
@@ -407,6 +409,9 @@ public final class AgendaHelper {
 
         if (player.hasLeaderUnlocked("keleresheroodlynn")) {
             names.add("Keleres Hero");
+        }
+        if (player.getGame().playerHasLeaderUnlockedOrAlliance(player, "atokeracommander")) {
+            names.add("Atokera Commander Ability");
         }
 
         if (player.hasTechReady("dsedyng")) {
@@ -1238,7 +1243,8 @@ public final class AgendaHelper {
         boolean playerPrevotesIsEmpty =
                 game.getStoredValue("preVoting" + player.getFaction()).isEmpty();
         boolean playerIsNotActivePlayer = "agendaWaiting".equalsIgnoreCase(game.getPhaseOfGame());
-        boolean playerIsPrevoting = !playerPrevotesIsEmpty || playerIsNotActivePlayer;
+        boolean playerIsPrevoting =
+                !playerPrevotesIsEmpty && (playerIsNotActivePlayer || game.getActivePlayer() != player);
         if (playerIsPrevoting) {
             if ("0".equalsIgnoreCase(votes)) {
                 MessageHelper.sendMessageToChannel(
@@ -1485,7 +1491,10 @@ public final class AgendaHelper {
                         StringTokenizer winnerInfo = new StringTokenizer(winner, "*");
                         while (winnerInfo.hasMoreTokens()) {
                             String tiedWinner = winnerInfo.nextToken();
-                            Button button = Buttons.blue("resolveAgendaVote_outcomeTie* " + tiedWinner, tiedWinner);
+                            Button button = Buttons.blue(
+                                    speaker.getFinsFactionCheckerPrefix() + "resolveAgendaVote_outcomeTie* "
+                                            + tiedWinner,
+                                    tiedWinner);
                             tiedWinners.add(button);
                         }
                     } else {
@@ -1844,6 +1853,13 @@ public final class AgendaHelper {
 
     public static void ministerOfIndustryCheck(
             Player player, Game game, Tile tile, GenericInteractionCreateEvent event) {
+
+        if (tile.isScar(game)) {
+            MessageHelper.sendMessageToChannel(
+                    player.getCardsInfoThread(),
+                    player.getRepresentationUnfogged()
+                            + " you just placed a space dock in an entropic scar -- it will not be able to use its PRODUCTION ability while it's in there, due to scars turning off unit abilities.");
+        }
         if (IsPlayerElectedService.isPlayerElected(game, player, "minister_industry") && !tile.isScar(game)) {
             String msg = player.getRepresentationUnfogged()
                     + "since you have _Minister of Industry_, you may build in tile "
@@ -4797,6 +4813,7 @@ public final class AgendaHelper {
         }
         Helper.refreshPlanetsOnTheRevote(player, game);
         eraseVotesOfFaction(game, pfaction);
+        game.setStoredValue("preVoting" + player.getFaction(), "");
         String eraseMsg = "Erased previous votes made by " + player.getFactionEmoji()
                 + " and readied the planets they previously exhausted\n\n" + getSummaryOfVotes(game, true);
         MessageHelper.sendMessageToChannel(player.getCorrectChannel(), eraseMsg);

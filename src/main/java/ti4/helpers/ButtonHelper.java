@@ -125,11 +125,13 @@ import ti4.service.fow.BlindSelectionService;
 import ti4.service.fow.FOWCombatThreadMirroring;
 import ti4.service.fow.FOWPlusService;
 import ti4.service.fow.GMService;
+import ti4.service.game.GameColorsService;
 import ti4.service.leader.CommanderUnlockCheckService;
 import ti4.service.milty.MiltyDraftTile;
 import ti4.service.milty.MiltyService;
 import ti4.service.planet.AddPlanetService;
 import ti4.service.planet.PlanetService;
+import ti4.service.player.PlayerColorService;
 import ti4.service.regex.RegexService;
 import ti4.service.tech.ShowTechDeckService;
 import ti4.service.transaction.SendDebtService;
@@ -1331,13 +1333,15 @@ public class ButtonHelper {
     @ButtonHandler("drawStatusACs")
     public static void drawStatusACs(Game game, Player player, ButtonInteractionEvent event) {
         if (game.getCurrentACDrawStatusInfo().contains(player.getFaction())) {
-            ReactionService.addReaction(
-                    event,
-                    game,
-                    player,
-                    true,
-                    false,
-                    "It seems you already drew your action cards for this Status Phase, so I will not deal you more. Please draw manually if this is a mistake.");
+            if (event != null) {
+                ReactionService.addReaction(
+                        event,
+                        game,
+                        player,
+                        true,
+                        false,
+                        "It seems you already drew your action cards for this Status Phase, so I will not deal you more. Please draw manually if this is a mistake.");
+            }
             return;
         }
         List<String> modifiers = new ArrayList<>();
@@ -1476,6 +1480,22 @@ public class ButtonHelper {
                     ButtonHelperAbilities.pillageCheck(player, game);
                 }
             }
+        }
+        if (player.hasAbility("bestow")) {
+            int commod = Math.min(player.getCommodities(), 2);
+            String message = player.getRepresentation() + "Resolve Bestow:\n-# You currently have "
+                    + player.getCommoditiesRepresentation()
+                    + " commodit" + (commod == 1 ? "y" : "ies")
+                    + ". This can be resolved after a transaction occurs or a trade agreement resolves.";
+            commod = Math.min(commod, 2);
+            Button convert = Buttons.green(
+                    "convert_2_comms",
+                    "Convert " + commod + " Commodit" + (commod == 1 ? "y" : "ies") + " Into "
+                            + (commod == 1 ? "a " : "") + "Trade Good" + (commod == 1 ? "" : "s"),
+                    MiscEmojis.Wash);
+            Button gain = Buttons.blue("gain_2_comms", "Gain 2 Commodities", MiscEmojis.comm);
+            List<Button> buttons = List.of(convert, gain);
+            MessageHelper.sendMessageToChannelWithButtons(player.getCorrectChannel(), message, buttons);
         }
     }
 
@@ -2502,9 +2522,7 @@ public class ButtonHelper {
         }
         Player neutral = game.getPlayerFromColorOrFaction("neutral");
         if (neutral == null) {
-            List<String> unusedColors =
-                    game.getUnusedColors().stream().map(ColorModel::getName).toList();
-            String color = new SetupNeutralPlayer().pickNeutralColor(unusedColors);
+            String color = SetupNeutralPlayer.pickNeutralColor(game);
             game.setupNeutralPlayer(color);
             neutral = game.getPlayerFromColorOrFaction("neutral");
         }
@@ -2939,6 +2957,7 @@ public class ButtonHelper {
                     finChecker + "replaceSleeperWith_pds_" + planet, "Replace Sleeper on " + planet + " With 1 PDS."));
             if (getNumberOfUnitsOnTheBoard(game, player, "mech") < 4
                     && player.hasUnit("titans_mech")
+                    && !tile.isScar()
                     && !isLawInPlay(game, "articles_war")) {
                 planetsWithSleepers.add(Buttons.green(
                         finChecker + "replaceSleeperWith_mech_" + planet,
@@ -4499,7 +4518,9 @@ public class ButtonHelper {
         // Agents
         if (player.hasUnexhaustedLeader("naazagent")) {
             endButtons.add(Buttons.green(
-                    player.finChecker() + "exhaustAgent_naazagent", "Use Naaz-Rokha Agents", FactionEmojis.Naaz));
+                    player.finChecker() + "exhaustAgent_naazagent_" + player.getFaction(),
+                    "Use Naaz-Rokha Agents",
+                    FactionEmojis.Naaz));
         }
         if (player.hasUnlockedBreakthrough("mirvedabt")) {
             endButtons.add(
@@ -6001,6 +6022,7 @@ public class ButtonHelper {
         StringBuilder successMessageBuilder = new StringBuilder(successMessage);
         for (String tilePos : tiles) {
             Tile tile = game.getTileByPosition(tilePos);
+            if (tile == null) continue;
             for (UnitHolder unitHolder : tile.getUnitHolders().values()) {
 
                 String colorID = Mapper.getColorID(player.getColor());
@@ -6901,7 +6923,7 @@ public class ButtonHelper {
         List<Button> buttons = new ArrayList<>();
         String userId = buttonID.split("_")[1];
         String factionId = buttonID.split("_")[2];
-        List<ColorModel> unusedColors = game.getUnusedColors();
+        List<ColorModel> unusedColors = GameColorsService.getUnusedColors(game);
 
         List<ColorModel> factionPrefColors = Mapper.getFaction(factionId).getPreferredColours().stream()
                 .map(Mapper::getColor)
@@ -6915,7 +6937,7 @@ public class ButtonHelper {
             }
         }
 
-        List<ColorModel> unusedPrefColors = game.getUnusedColorsPreferringBase();
+        List<ColorModel> unusedPrefColors = GameColorsService.getUnusedColorsWithBaseColorsFirst(game);
         unusedPrefColors = ColourHelper.sortColours(factionId, unusedPrefColors);
         for (ColorModel color : unusedPrefColors) {
             if (factionPrefColors.contains(color)) {
@@ -7224,7 +7246,7 @@ public class ButtonHelper {
         if (game.getPlayer(game.getSpeakerUserID()) != null) {
             speaker = game.getPlayers().get(game.getSpeakerUserID());
         }
-        if (game.getPlayerFromColorOrFaction(color) != null) color = player.getNextAvailableColour();
+        if (game.getPlayerFromColorOrFaction(color) != null) color = PlayerColorService.getPreferredColor(player);
         if (buttonID.split("_").length == 6 || speaker != null) {
             if (speaker != null) {
                 MiltyService.secondHalfOfPlayerSetup(player, game, color, factionId, pos, event, false);
@@ -7555,22 +7577,6 @@ public class ButtonHelper {
                                 owningPlayer.getRepresentation()
                                         + " this is a reminder that this is the window to play _Experimental Battlestation_.");
                         return;
-                    }
-                }
-            }
-        }
-    }
-
-    public static void fixRelics(Game game) {
-        for (Player player : game.getPlayers().values()) {
-            if (player != null && player.getRelics() != null) {
-                List<String> rels = new ArrayList<>(player.getRelics());
-                for (String relic : rels) {
-                    if (relic.contains("extra")) {
-                        player.removeRelic(relic);
-                        relic = relic.replace("extra1", "");
-                        relic = relic.replace("extra2", "");
-                        player.addRelic(relic);
                     }
                 }
             }

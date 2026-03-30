@@ -33,7 +33,6 @@ import ti4.map.Tile;
 import ti4.map.UnitHolder;
 import ti4.message.MessageHelper;
 import ti4.message.logging.BotLogger;
-import ti4.model.ColorModel;
 import ti4.model.ExploreModel;
 import ti4.model.PlanetTypeModel.PlanetType;
 import ti4.model.UnitModel;
@@ -94,7 +93,7 @@ public final class ButtonHelperAbilities {
         ButtonHelper.deleteMessage(event);
     }
 
-    public static void autoneticMemoryStep1(Game game, Player player, int count) {
+    static void autoneticMemoryStep1(Player player, int count) {
         List<Button> buttons = new ArrayList<>();
         buttons.add(Buttons.green("autoneticMemoryStep2_" + count, "Use Autonetic Memory"));
         buttons.add(Buttons.red("autoneticMemoryDecline_" + count, "Decline"));
@@ -204,7 +203,7 @@ public final class ButtonHelperAbilities {
     }
 
     @ButtonHandler("startBestow")
-    public static void startBestow(Game game, Player player, ButtonInteractionEvent event) {
+    public static void startBestow(Player player, ButtonInteractionEvent event) {
         event.getMessage().delete().queue(Consumers.nop(), BotLogger::catchRestError);
         List<Button> buttons = new ArrayList<>();
         buttons.add(Buttons.green("bestowPart2_" + player.getFaction(), "Gain 2 Commodities"));
@@ -2362,33 +2361,32 @@ public final class ButtonHelperAbilities {
         if (game.isDangerousWildsMode()) {
             Player neutral = game.getPlayerFromColorOrFaction("neutral");
             if (neutral == null) {
-                List<String> unusedColors =
-                        game.getUnusedColors().stream().map(ColorModel::getName).toList();
-                String color = new SetupNeutralPlayer().pickNeutralColor(unusedColors);
+                String color = SetupNeutralPlayer.pickNeutralColor(game);
                 game.setupNeutralPlayer(color);
                 neutral = game.getPlayerFromColorOrFaction("neutral");
             }
-
-            for (Tile tile : game.getTileMap().values()) {
-                for (UnitHolder uH : tile.getPlanetUnitHolders()) {
-                    if (ButtonHelper.getTypeOfPlanet(game, uH.getName()).contains("hazardous")) {
-                        boolean owned = false;
-                        for (Player p2 : game.getRealPlayers()) {
-                            if (p2.getPlanets().contains(uH.getName())) {
-                                owned = true;
-                                break;
+            if (neutral != null) {
+                for (Tile tile : game.getTileMap().values()) {
+                    for (UnitHolder uH : tile.getPlanetUnitHolders()) {
+                        if (ButtonHelper.getTypeOfPlanet(game, uH.getName()).contains("hazardous")) {
+                            boolean owned = false;
+                            for (Player p2 : game.getRealPlayers()) {
+                                if (p2.getPlanets().contains(uH.getName())) {
+                                    owned = true;
+                                    break;
+                                }
                             }
-                        }
-                        if (!owned) {
-                            int resource = Helper.getPlanetResources(uH.getName(), game);
-                            int neutralUnitsToAdd = resource - uH.getUnitCount(UnitType.Infantry, neutral);
-                            if (neutralUnitsToAdd > 0) {
-                                AddUnitService.addUnits(
-                                        event,
-                                        tile,
-                                        game,
-                                        neutral.getColor(),
-                                        neutralUnitsToAdd + " infantry " + uH.getName());
+                            if (!owned) {
+                                int resource = Helper.getPlanetResources(uH.getName(), game);
+                                int neutralUnitsToAdd = resource - uH.getUnitCount(UnitType.Infantry, neutral);
+                                if (neutralUnitsToAdd > 0) {
+                                    AddUnitService.addUnits(
+                                            event,
+                                            tile,
+                                            game,
+                                            neutral.getColor(),
+                                            neutralUnitsToAdd + " infantry " + uH.getName());
+                                }
                             }
                         }
                     }
@@ -2528,7 +2526,7 @@ public final class ButtonHelperAbilities {
         List<Button> buttons = new ArrayList<>();
         for (String planet : player.getPlanetsAllianceMode()) {
             Tile tile = game.getTileFromPlanet(planet);
-            if (tile == null) {
+            if (tile == null || game.getUnitHolderFromPlanet(planet).isSpaceStation()) {
                 continue;
             }
             for (String pos2 : FoWHelper.getAdjacentTiles(game, tile.getPosition(), player, false)) {
@@ -2558,6 +2556,7 @@ public final class ButtonHelperAbilities {
         List<Button> buttons = new ArrayList<>();
         for (String planet : player.getPlanetsAllianceMode()) {
             Tile tile = game.getTileFromPlanet(planet);
+            if (tile == null) continue;
             for (String pos2 : FoWHelper.getAdjacentTilesAndNotThisTile(game, tile.getPosition(), player, false)) {
                 Tile tile2 = game.getTileByPosition(pos2);
                 for (Planet planetUnit2 : tile2.getPlanetUnitHolders()) {
@@ -2670,7 +2669,10 @@ public final class ButtonHelperAbilities {
         List<Button> options = new ArrayList<>();
         options.add(Buttons.green("indoctrinate_" + planet + "_infantry", "Indoctrinate 1 Infantry into 1 Infantry")
                 .withEmoji(UnitEmojis.infantry.asEmoji()));
-        if (player.hasUnit("yin_mech")) {
+        if (player.hasUnit("yin_mech")
+                && ButtonHelper.getNumberOfUnitsOnTheBoard(game, player, "mech", true) < 4
+                && !ButtonHelper.isLawInPlay(game, "articles_war")
+                && !game.getTileFromPlanet(planet).isScar()) {
             options.add(Buttons.green("indoctrinate_" + planet + "_mech", "Indoctrinate 1 Infantry into 1 Mech")
                     .withEmoji(UnitEmojis.mech.asEmoji()));
         }

@@ -782,9 +782,9 @@ public class StartPhaseService {
                 playersWithSCs++;
             }
         }
+        String message2 = "Resolve status homework using the buttons. \n";
 
         if (playersWithSCs > 0) {
-            StatusCleanupService.runStatusCleanup(game);
             MessageHelper.sendMessageToChannel(
                     game.getMainGameChannel(), "### " + game.getPing() + " **Status Cleanup Run!**");
             if (!game.isFowMode()) {
@@ -794,13 +794,12 @@ public class StartPhaseService {
                         DisplayType.map,
                         fileUpload -> MessageHelper.sendFileUploadToChannel(game.getActionsChannel(), fileUpload));
             }
+            StatusCleanupService.runStatusCleanup(game);
         }
-
         for (Player player : game.getRealPlayers()) {
             sendStatusReminders(event, game, player);
         }
-        String message2 = "Resolve status homework using the buttons. \n";
-        game.setCurrentACDrawStatusInfo("");
+
         Button draw1AC = Buttons.green("drawStatusACs", "Draw Status Phase Action Cards", CardEmojis.getACEmoji(game));
         Button getCCs = Buttons.green("redistributeCCButtons", "Redistribute, Gain, & Confirm Command Tokens")
                 .withEmoji(Emoji.fromFormatted("🔺"));
@@ -859,7 +858,9 @@ public class StartPhaseService {
                     Please click the "Ready For Strategy Phase" button once you are done resolving these or if you decline to do so.""";
         }
         List<Button> buttons = new ArrayList<>();
-        buttons.add(draw1AC);
+        if (game.isFowMode()) {
+            buttons.add(draw1AC);
+        }
         buttons.add(getCCs);
         buttons.add(passOnAbilities);
         if (yssarilPolicy != null) {
@@ -1086,7 +1087,7 @@ public class StartPhaseService {
         //     nextPlayer.setInRoundTurnCount(1);
         // }
         if (isFowPrivateGame) {
-            for (Player p2 : game.getRealPlayers()) {
+            for (Player p2 : Helper.getSpeakerOrFullPriorityOrder(game)) {
                 if (p2.hasTechReady("qdn") && p2.getTg() > 2 && p2.getStrategicCC() > 0) {
                     List<Button> buttons = new ArrayList<>();
                     buttons.add(Buttons.green("startQDN", "Use Quantum Datahub Node", TechEmojis.CyberneticTech));

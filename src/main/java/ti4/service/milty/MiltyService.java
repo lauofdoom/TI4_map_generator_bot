@@ -54,6 +54,7 @@ import ti4.service.info.UnitInfoService;
 import ti4.service.leader.UnlockLeaderService;
 import ti4.service.planet.AddPlanetService;
 import ti4.service.planet.PlanetService;
+import ti4.service.player.PlayerColorService;
 import ti4.service.rules.ThundersEdgeRulesService;
 import ti4.service.tech.ListTechService;
 import ti4.service.unit.AddUnitService;
@@ -189,6 +190,15 @@ public class MiltyService {
                     MessageHelper.sendMessageToChannel(event.getMessageChannel(), msg);
                 } else {
                     MiltyDraftDisplayService.repostDraftInformation(draftManager, game);
+                    for (String player : draftManager.getPlayers()) {
+                        Player p = game.getPlayer(player);
+                        if (p != null && p != draftManager.getCurrentDraftPlayer(game)) {
+                            MessageHelper.sendMessageToChannel(
+                                    p.getCardsInfoThread(),
+                                    p.getRepresentation() + " You can queue your choices with these buttons",
+                                    draftManager.getQueueButtons(p, game));
+                        }
+                    }
                     game.setPhaseOfGame("miltydraft");
                     GameManager.save(game, "Milty"); // TODO: We should be locking since we're saving
                     if (game.isThundersEdge()) {
@@ -262,7 +272,7 @@ public class MiltyService {
         for (Player playerInfo : players.values()) {
             if (playerInfo != player) {
                 if (color.equals(playerInfo.getColor())) {
-                    String newColor = player.getNextAvailableColour();
+                    String newColor = PlayerColorService.getPreferredColor(player);
                     String message = "Player:" + playerInfo.getUserName() + " already uses color:" + color
                             + " - changing color to " + newColor;
                     MessageHelper.sendMessageToChannel(event.getMessageChannel(), message);
@@ -282,8 +292,8 @@ public class MiltyService {
             }
         }
 
-        if (ColorChangeHelper.colorIsExclusive(color, player)) {
-            color = player.getNextAvailableColorIgnoreCurrent();
+        if (!ColorChangeHelper.isColorAllowedForPlayer(color, player)) {
+            color = PlayerColorService.getPreferredColor(player);
         }
 
         if (player.isRealPlayer() && player.getSo() > 0) {

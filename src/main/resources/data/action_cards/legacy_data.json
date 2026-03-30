@@ -248,8 +248,8 @@
         "alias": "shrapnel_turrets2",
         "name": "Shrapnel Turrets",
         "phase": "Action",
-        "window": "Before you roll dice for ANTI-FIGHTER BARRAGE",
-        "text": "Each of your non-fighter ships in the active system that do not have ANTI-FIGHTER BARRAGE gain ANTI-FIGHTER BARRAGE 9(x2) until the end of the combat.",
+        "window": "At the start of a space combat",
+        "text": "Choose any number of your ships that have a capacity value. Each of those ships gain ANTI-FIGHTER BARRAGE 8 (x2) during this combat.",
         "automationID": "shrapnel_turrets",
         "flavorText": "Mendosa grinned widely. \"Ye say we're out of munitions, yet look at all this junk lyin' around. Get it movin' fast enough, and it'll shred them up just fine.\"",
         "source": "deprecated"
@@ -1644,6 +1644,15 @@
         "window": "When 1 or more of your units use PRODUCTION",
         "text": "Reduce the combined cost of the produced units by 3.",
         "flavorText": "There is an old adage present in nearly every galactic civilization that money cannot buy true happiness, but money could, in fact, buy a new ship. And that made Tai very, very happy indeed.",
+        "source": "deprecated"
+    },
+    {
+        "alias": "strategic_aid",
+        "name": "Strategic Aid",
+        "phase": "Action",
+        "window": "When you perform a strategic action",
+        "text": "Choose up to 2 other players. During this strategic action, those players may spend command tokens from their reinforcements instead of their strategy pool.",
+        "flavorText": "Mathis was not fooled. The pageantry and endless bandying of crooked words with these witless worms was yet another scheme.",
         "source": "deprecated"
     }
 ]
