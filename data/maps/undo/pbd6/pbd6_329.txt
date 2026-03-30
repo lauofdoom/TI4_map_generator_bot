@@ -3,16 +3,16 @@ Lau
 pbd6
 -mapinfo-
 -gameinfo-
-latest_command lau2628 pressed button: temporaryPingDisable -- Disable Pings For Turn
-phase_of_game action
+latest_command lau2628 pressed button: exhaustForVotes_planet_kostboth -- Kostboth (1)
+phase_of_game agendaVoting
 latest_outcome_voted_for for
-secret_objectives csl,ctr,sb,sai,mlp,fwp,eh,syc,bam,fwm,ose,faa,mtm,fc,mew,otf,dts,pe,ttfd,mp,dp,fsn,ans,dtd,lsc,dfat,mrm,te,btv,dyp,hrm,pem,sar,dhw,gamf,baf,btgk,dtgs
+secret_objectives gamf,sb,dfat,otf,sai,ose,mlp,ctr,fwp,fsn,faa,fc,dyp,dts,dtd,mp,btv,btgk,mtm,baf,csl,hrm,lsc,ans,fwm,pe,sar,bam,uf,eh,dp,ttfd,pem,syc,mew,dtgs,te,mrm
 action_cards f_deployment,fs2,bribery,arch_expedition,war_effort,s_retreat3,intercept,mjets1,reflective,mb1,war_machine2,messiah,unstable,economic_initiative,sh4,meltdown,mb4,industrial_initiative,rally,s_retreat4,disgrace,mjets4,disable,salvage,fs1,fs4,ghost_ship,refit,counterstroke,war_rider,seize,summit,nav_suite,impersonation,diplo_rider,unexpected,war_machine3,fire_team,imp_rider,war_machine4,fs3,ghost_squad,sabo2,cripple,dh3,abs,spy,infiltrate,sh2,dp4,insider,master_plan,sabo3,politic_rider,reparations,decoy,plague,veto,lucky,silence_space,jamming,stability,scramble,deadly_plot,mb3,blitz,sh1,distinguished,waylay,divert_funding,sanction,repeal,dh1,coup,assassin,war_machine1,solar_flare,uprising,confounding,reverse_engineer,mining_initiative,mjets3,insub,harness,dp1,lead_rider,scuttle,const_rider,plagiarize,upgrade,parley,courageous,trade_rider,tech_rider,sabo1,f_conscription,experimental,reveal_prototype,fsb,sabo4,investments,bunker,confusing,sh3,f_researched,tactical,f_prototype,hack,emergency,dh2,s_retreat1,mb2,mjets2,dp3,lost_star
 action_cards_discarded probe,437;
 action_cards_status 
-explore dv1,ent,cm1,exp2,irf1,ms2,irf4,hrf5,hrf3,mw,kel2,warfare,irf3,vfs1,hrf7,cm3,minent,fb4,lc1,biotic,mo1,gamma,rw,ls,propulsion,crf6,ms1,exp3,ds,crf7,urf3,aw4,aw3,crf3,lf1,cybernetic,urf2,vfs3,lf3,aw1,pw,dv2,mirage,hrf1,gw,dmz,frln3,mo2,toe,mo3,aw2,majent,frln2,lc2,kel1,ed1,irf2,crf8,irf5,lf4,urf1,ed2,cm2,hrf6,fb2,fb1,lf2,crf1,hrf2,ion,crf9,exp1
+explore dv1,ent,cm1,exp2,irf1,ms2,irf4,hrf5,hrf3,mw,kel2,frln1,warfare,irf3,vfs1,hrf7,cm3,minent,fb4,lc1,biotic,mo1,gamma,rw,ls,propulsion,crf6,ms1,exp3,ds,crf7,urf3,aw4,aw3,crf3,lf1,cybernetic,urf2,vfs3,lf3,aw1,pw,dv2,mirage,hrf1,gw,dmz,frln3,mo2,toe,mo3,aw2,majent,frln2,lc2,kel1,ed1,irf2,crf8,irf5,lf4,urf1,ed2,cm2,hrf6,fb2,fb1,lf2,crf1,hrf2,ion,crf9,exp1
 relics thetriad,obsidian,prophetstears,thalnos,codex,dynamiscore,nanoforge,emphidia,dominusorb,metalivoidshielding,heartofixth,shard,mawofworlds,emelpar,neuraloop,stellarconverter,circletofthevoid,bookoflatvinia
-discarded_explores fb3,dw,vfs2,frln1
+discarded_explores fb3,dw,vfs2
 speaker 533058401882603530
 tyrant 
 active_player 533058401882603530
@@ -22,10 +22,10 @@ players_who_hit_persistent_no_after
 players_who_hit_persistent_no_when 
 current_agenda_info Directive_For/Against_362_cladenstine
 current_acdrawstatus_info _mentak
-last_active_player_change 1773915895965
-sc_played 1,true;4,false;6,false;7,false;8,false;
-agenda_vote_info for,mentak_1:
-check_reacts_info scPlayMsgID6,1480792724436160563:scPlayMsgID7,1484130357228867724:scPlayMsgTime51,1773915451109:newStatusScoringMode,Yes:scPlayMsgID4,1484126818440052797:agendaRes430,mentak28:mentakround1SO,None:agendaRes310,mentak907:agendaRes431,for362:scPlayMsgID1,1484133712122613921:scPlayMsgTime16,1773118897519:mentakround3SO,Establish{sp}a{sp}Perimeter:whensResolved,Yes:startTimeOfRound2StatusHomework,1773205264551:originalCCsFormentak,0/4/0:startTimeOfRound5Strategy,1773915435314:startTimeOfRound2StatusScoring,1773205254973:declinedWhens,mentak{usc}:startTimeOfRound3StatusHomework,1773914229387:Round5SCPickFormentak,1:1484126824500957184SCReacts,{usc}mentak{usc}mentak:agendaRes320,7241:Round2SCPickFormentak,8:mentakround1PO,None:startTimeOfRound1StatusHomework,1773124308780:agendaCount,2:mentakround3PO,Build{sp}Defenses:startTimeOfRound3Strategy,1773205291383:scPlayMsgTime28,1773205196185:1481154686563123354SCReacts,{usc}mentak:lastActiveSystem,207:startTimeOfRound3Agenda1,1773914269768:startTimeOfRound3Agenda2,1773914396330:factionsThatAreNotDiscardingSOs,mentak*:startTimeOfRound1Strategy,1773094110561:IslandMode,true:Round3SCPickFormentak,4:scPlayMsgID8,1481154686563123354:1484130363013075007SCReacts,{usc}mentak:1481154686563123354soSCReacts,{usc}mentak:queuedAgendasMode,Yes:Round4SCPickFormentak,7:aftersResolved,Yes:latestOutcomeVotedFormentak,for:mentakround2SO,None:revealedPOInRound1,Yes:mentakround4SO,None:scPlayMsgTime34,1773913807449:revealedPOInRound3,Yes:revealedPOInRound2,Yes:revealedPOInRound4,Yes:lawsDisabled,no:startTimeOfRound1StatusScoring,1773124290187:revealedFlop1,Yes:Round1SCPickFormentak,6:lastAgendaReactTime,1773915374936:scPlay8,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1481154686563123354:passOnAllWhensNAftersmentak,Yes:scPlay6,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1480792724436160563:scPlay7,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484130357228867724:scPlay4,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484126818440052797:queuedAftersLockedFormentak,Yes:mentakround2PO,None:scPlayMsgTime47,1773914651220:declinedAfters,mentak{usc}:startTimeOfRound3StatusScoring,1773914186736:mentakround4PO,Diversify{sp}Research:startTimeOfRound4StatusScoring,1773915207999:startTimeOfRound4Strategy,1773914640586:1484130357228867724SCReacts,{usc}mentak:startTimeOfRound4StatusHomework,1773915254148:startTimeOfRound2Strategy,1773130769688:startTimeOfRound4Agenda2,1773915374940:startTimeOfRound4Agenda1,1773915307595:scPlay1,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484133712122613921:
+last_active_player_change 1773915374939
+sc_played 4,false;6,false;7,false;8,false;
+agenda_vote_info 
+check_reacts_info scPlayMsgID6,1480792724436160563:scPlayMsgID7,1484130357228867724:newStatusScoringMode,Yes:scPlayMsgID4,1484126818440052797:agendaRes430,mentak28:mentakround1SO,None:agendaRes310,mentak907:scPlayMsgTime16,1773118897519:mentakround3SO,Establish{sp}a{sp}Perimeter:whensResolved,Yes:startTimeOfRound2StatusHomework,1773205264551:originalCCsFormentak,0/4/0:startTimeOfRound2StatusScoring,1773205254973:declinedWhens,mentak{usc}:startTimeOfRound3StatusHomework,1773914229387:1484126824500957184SCReacts,{usc}mentak{usc}mentak:agendaRes320,7241:Round2SCPickFormentak,8:mentakround1PO,None:startTimeOfRound1StatusHomework,1773124308780:agendaCount,2:mentakround3PO,Build{sp}Defenses:startTimeOfRound3Strategy,1773205291383:scPlayMsgTime28,1773205196185:1481154686563123354SCReacts,{usc}mentak:lastActiveSystem,309:startTimeOfRound3Agenda1,1773914269768:startTimeOfRound3Agenda2,1773914396330:factionsThatAreNotDiscardingSOs,mentak*:startTimeOfRound1Strategy,1773094110561:IslandMode,true:Round3SCPickFormentak,4:scPlayMsgID8,1481154686563123354:1484130363013075007SCReacts,{usc}mentak:1481154686563123354soSCReacts,{usc}mentak:queuedAgendasMode,Yes:Round4SCPickFormentak,7:aftersResolved,Yes:latestOutcomeVotedFormentak,for:mentakround2SO,None:revealedPOInRound1,Yes:mentakround4SO,None:scPlayMsgTime34,1773913807449:revealedPOInRound3,Yes:revealedPOInRound2,Yes:revealedPOInRound4,Yes:lawsDisabled,no:startTimeOfRound1StatusScoring,1773124290187:revealedFlop1,Yes:Round1SCPickFormentak,6:lastAgendaReactTime,1773915374936:scPlay8,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1481154686563123354:passOnAllWhensNAftersmentak,Yes:scPlay6,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1480792724436160563:currentActionSummarymentak,{sp}Passed.:scPlay7,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484130357228867724:scPlay4,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484126818440052797:queuedAftersLockedFormentak,Yes:mentakround2PO,None:scPlayMsgTime47,1773914651220:declinedAfters,mentak{usc}:startTimeOfRound3StatusScoring,1773914186736:mentakround4PO,Diversify{sp}Research:startTimeOfRound4StatusScoring,1773915207999:startTimeOfRound4Strategy,1773914640586:1484130357228867724SCReacts,{usc}mentak:startTimeOfRound4StatusHomework,1773915254148:startTimeOfRound2Strategy,1773130769688:startTimeOfRound4Agenda2,1773915374940:startTimeOfRound4Agenda1,1773915307595:
 thalnos_units 
 slash_command_string move_units,1:
 acs_sabod 
@@ -46,7 +46,7 @@ publicObjectives2 massive_cities,become_legend,galvanize,conquer,control_borderl
 so_to_po 
 purged_pn 
 publicObjectives1peakable 
-saved_buttons mentak;temporaryPingDisable;Disable Pings For Turn;DANGER,mentak;deleteButtons;Delete These Buttons;SECONDARY
+saved_buttons mentak;exhaustForVotes_planet_kostboth;Kostboth (1);SECONDARY;<:Kostboth:1479340621247418559>,mentak;exhaustForVotes_planet_vegamajor;Vega Major (1);SECONDARY;<:VegaMajor:1479341829165027358>,mentak;exhaustForVotes_planet_vegaminor;Vega Minor (2);SECONDARY;<:VegaMinor:1479342531350237235>,mentak;exhaustForVotes_planet_wellon;Wellon (2);SECONDARY;<:Wellon:1479341794725597236>,mentak;exhaustForVotes_planet_mrte;Mecatol Rex (6);SECONDARY;<:Mecatol:1479341477795594301>,mentak;exhaustForVotes_allPlanets_12;Exhaust All Voting Planets (12);SECONDARY,mentak;FFCC_mentak_proceedToFinalizingVote;Done exhausting planets.;DANGER
 pinged_systems 
 publicObjectives2peakable distant_lands,vast_reserves,centralize_trade,golden_age
 publicObjectives1Peeked 
@@ -63,16 +63,19 @@ adjacencyOverrides
 creation_date 2026.03.09
 creation_date_time 1773057302496
 started_date 0
-last_modified_date 1774047576380
+last_modified_date 1773915409469
 ended_date 0
-round 5
-button_press_count 372
+round 4
+button_press_count 325
 slash_command_count 1
 game_custom_name bleh
 table_talk_channel 1480534378663776489
 main_game_channel 1480534380698144950
 saved_channel 1480534380698144950
-saved_message <:Mentak:1479342907814318150><@533058401882603530> <:red:1479342216710328430>**Red**, if the game is not waiting on you, you may disable the auto ping for this turn so it doesn't annoy you. It will turn back on for the next turn.
+saved_message # _Clandestine Operations_
+No current riders or votes have been cast yet.
+
+Chose to vote for For. Click buttons to exhaust planets and use abilities for votes.
 bot_map_channel 1480534382002573313
 game_launch_thread_id null
 is_tigl_game false
@@ -94,7 +97,7 @@ show_gears true
 show_banners true
 show_hex_borders off
 purged_fragment 3
-temporary_ping_disable true
+temporary_ping_disable false
 dominus_orb false
 component_action false
 just_played_component_ac false
@@ -232,43 +235,43 @@ plot_cards
 plot_factions 
 fragments hrf4
 relics titanprototype,metalivoidarmaments,lightrailordnance
-exhausted_relics titanprototype
+exhausted_relics 
 mahact_cc 
 franken_bag_to_pass 
 franken_personal_bag 
 franken_items_to_draft 
 faction_tech mc,so
 tech ps,st,sdn,sar
-spent_things 
+spent_things planet_kostboth
 bombard_units 
 transaction_items 
 teammate_ids 533058401882603530
 tech_exhausted 
 tech_purged 
 planets mollprimus,kostboth,capha,vegamajor,vegaminor,wellon,mrte
-planets_exhausted vegamajor,capha
-planets_ability_exhausted mrte
+planets_exhausted mollprimus,kostboth
+planets_ability_exhausted 
 tactical_cc 2
 fleet_cc 4
 strategy_cc 0
 abilities ambush,pillage
 trade_goods 0
 expected_hits_times_10 0
-total_expenses 56
+total_expenses 53
 bonus_scored_secrets 0
-turn_count 4
+turn_count 0
 actual_hits 0
 stasis_infantry 0
 auto_sabo_pass_median 0
 capture 
 unit_cap 
-secret_objectives uf,347;
-produced_units 
+secret_objectives dhw,971;
+produced_units mf_309_capha,2;
 secret_objectives_scored eap,288;
-number_of_turns 34
-total_turn_time 202458108
-strategy_card 1
-followed_sc 1
+number_of_turns 30
+total_turn_time 201997456
+strategy_card 
+followed_sc 
 player_stored_values 
 breakthroughs mentakbt
 breakthrough_unl_map mentakbt,false
@@ -361,7 +364,6 @@ red—cv 1,0,0,0
 -units-
 wellon
 red—gf 1,0,0,0
-red—pd 1,0,0,0
 -endunits-
 -planettokens-
 control_red.png
@@ -703,16 +705,13 @@ lockedmallice
 -units-
 space
 red—ca 1,0,0,0
-red—fs 1,0,0,0
 -endunits-
 -planettokens-
-command_red.png
 -planetendtokens-
 -units-
 vegamajor
 red—gf 1,0,0,0
 red—pd 1,0,0,0
-red—mf 2,0,0,0
 -endunits-
 -planettokens-
 control_red.png
@@ -721,7 +720,6 @@ control_red.png
 vegaminor
 red—gf 1,0,0,0
 red—pd 1,0,0,0
-red—mf 1,0,0,0
 -endunits-
 -planettokens-
 control_red.png
@@ -796,6 +794,7 @@ space
 -unitholder-
 -units-
 space
+red—fs 1,0,0,0
 -endunits-
 -planettokens-
 -planetendtokens-
@@ -809,6 +808,7 @@ control_red.png
 capha
 red—sd 1,0,0,0
 red—pd 1,0,0,0
+red—mf 2,0,0,0
 -endunits-
 -planettokens-
 control_red.png

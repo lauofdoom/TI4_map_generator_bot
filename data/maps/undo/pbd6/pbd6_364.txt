@@ -3,7 +3,7 @@ Lau
 pbd6
 -mapinfo-
 -gameinfo-
-latest_command lau2628 pressed button: temporaryPingDisable -- Disable Pings For Turn
+latest_command lau2628 pressed button: FFCC_mentak_landUnits_207_1mf_vegaminor_red -- Land 1 Mech on Vega Minor (1/2)
 phase_of_game action
 latest_outcome_voted_for for
 secret_objectives csl,ctr,sb,sai,mlp,fwp,eh,syc,bam,fwm,ose,faa,mtm,fc,mew,otf,dts,pe,ttfd,mp,dp,fsn,ans,dtd,lsc,dfat,mrm,te,btv,dyp,hrm,pem,sar,dhw,gamf,baf,btgk,dtgs
@@ -16,16 +16,16 @@ discarded_explores fb3,dw,vfs2,frln1
 speaker 533058401882603530
 tyrant 
 active_player 533058401882603530
-active_system 
+active_system 207
 auto_ping 12
 players_who_hit_persistent_no_after 
 players_who_hit_persistent_no_when 
 current_agenda_info Directive_For/Against_362_cladenstine
 current_acdrawstatus_info _mentak
-last_active_player_change 1773915895965
+last_active_player_change 1773915533781
 sc_played 1,true;4,false;6,false;7,false;8,false;
 agenda_vote_info for,mentak_1:
-check_reacts_info scPlayMsgID6,1480792724436160563:scPlayMsgID7,1484130357228867724:scPlayMsgTime51,1773915451109:newStatusScoringMode,Yes:scPlayMsgID4,1484126818440052797:agendaRes430,mentak28:mentakround1SO,None:agendaRes310,mentak907:agendaRes431,for362:scPlayMsgID1,1484133712122613921:scPlayMsgTime16,1773118897519:mentakround3SO,Establish{sp}a{sp}Perimeter:whensResolved,Yes:startTimeOfRound2StatusHomework,1773205264551:originalCCsFormentak,0/4/0:startTimeOfRound5Strategy,1773915435314:startTimeOfRound2StatusScoring,1773205254973:declinedWhens,mentak{usc}:startTimeOfRound3StatusHomework,1773914229387:Round5SCPickFormentak,1:1484126824500957184SCReacts,{usc}mentak{usc}mentak:agendaRes320,7241:Round2SCPickFormentak,8:mentakround1PO,None:startTimeOfRound1StatusHomework,1773124308780:agendaCount,2:mentakround3PO,Build{sp}Defenses:startTimeOfRound3Strategy,1773205291383:scPlayMsgTime28,1773205196185:1481154686563123354SCReacts,{usc}mentak:lastActiveSystem,207:startTimeOfRound3Agenda1,1773914269768:startTimeOfRound3Agenda2,1773914396330:factionsThatAreNotDiscardingSOs,mentak*:startTimeOfRound1Strategy,1773094110561:IslandMode,true:Round3SCPickFormentak,4:scPlayMsgID8,1481154686563123354:1484130363013075007SCReacts,{usc}mentak:1481154686563123354soSCReacts,{usc}mentak:queuedAgendasMode,Yes:Round4SCPickFormentak,7:aftersResolved,Yes:latestOutcomeVotedFormentak,for:mentakround2SO,None:revealedPOInRound1,Yes:mentakround4SO,None:scPlayMsgTime34,1773913807449:revealedPOInRound3,Yes:revealedPOInRound2,Yes:revealedPOInRound4,Yes:lawsDisabled,no:startTimeOfRound1StatusScoring,1773124290187:revealedFlop1,Yes:Round1SCPickFormentak,6:lastAgendaReactTime,1773915374936:scPlay8,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1481154686563123354:passOnAllWhensNAftersmentak,Yes:scPlay6,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1480792724436160563:scPlay7,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484130357228867724:scPlay4,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484126818440052797:queuedAftersLockedFormentak,Yes:mentakround2PO,None:scPlayMsgTime47,1773914651220:declinedAfters,mentak{usc}:startTimeOfRound3StatusScoring,1773914186736:mentakround4PO,Diversify{sp}Research:startTimeOfRound4StatusScoring,1773915207999:startTimeOfRound4Strategy,1773914640586:1484130357228867724SCReacts,{usc}mentak:startTimeOfRound4StatusHomework,1773915254148:startTimeOfRound2Strategy,1773130769688:startTimeOfRound4Agenda2,1773915374940:startTimeOfRound4Agenda1,1773915307595:scPlay1,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484133712122613921:
+check_reacts_info scPlayMsgID6,1480792724436160563:scPlayMsgID7,1484130357228867724:scPlayMsgTime51,1773915451109:newStatusScoringMode,Yes:scPlayMsgID4,1484126818440052797:agendaRes430,mentak28:mentakround1SO,None:agendaRes310,mentak907:agendaRes431,for362:scPlayMsgID1,1484133712122613921:scPlayMsgTime16,1773118897519:mentakround3SO,Establish{sp}a{sp}Perimeter:whensResolved,Yes:startTimeOfRound2StatusHomework,1773205264551:originalCCsFormentak,0/4/0:startTimeOfRound5Strategy,1773915435314:startTimeOfRound2StatusScoring,1773205254973:declinedWhens,mentak{usc}:startTimeOfRound3StatusHomework,1773914229387:Round5SCPickFormentak,1:1484126824500957184SCReacts,{usc}mentak{usc}mentak:agendaRes320,7241:Round2SCPickFormentak,8:mentakround1PO,None:startTimeOfRound1StatusHomework,1773124308780:agendaCount,2:mentakround3PO,Build{sp}Defenses:startTimeOfRound3Strategy,1773205291383:scPlayMsgTime28,1773205196185:1481154686563123354SCReacts,{usc}mentak:lastActiveSystem,207:startTimeOfRound3Agenda1,1773914269768:startTimeOfRound3Agenda2,1773914396330:factionsThatAreNotDiscardingSOs,mentak*:startTimeOfRound1Strategy,1773094110561:IslandMode,true:Round3SCPickFormentak,4:scPlayMsgID8,1481154686563123354:1484130363013075007SCReacts,{usc}mentak:1481154686563123354soSCReacts,{usc}mentak:queuedAgendasMode,Yes:Round4SCPickFormentak,7:roundstats_tactical_had_combat_533058401882603530,false:aftersResolved,Yes:latestOutcomeVotedFormentak,for:mentakround2SO,None:revealedPOInRound1,Yes:mentakround4SO,None:scPlayMsgTime34,1773913807449:revealedPOInRound3,Yes:roundstats_tactical_open_533058401882603530,5:revealedPOInRound2,Yes:revealedPOInRound4,Yes:lawsDisabled,no:startTimeOfRound1StatusScoring,1773124290187:revealedFlop1,Yes:Round1SCPickFormentak,6:lastAgendaReactTime,1773915374936:scPlay8,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1481154686563123354:passOnAllWhensNAftersmentak,Yes:scPlay6,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1480792724436160563:currentActionSummarymentak,{sp}Activated{sp}000{sp}(Mecatol{sp}Rex).{sp}Activated{sp}207{sp}(Vega{sp}Major/Vega{sp}Minor).{sp}<{cln}Mentak{cln}1479342907814318150>{sp}found{sp}{usc}Freelancers{usc}{sp}on{sp}Vega{sp}Major{sp}(2/1).{sp}Moved{sp}ships{sp}there.:scPlay7,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484130357228867724:scPlay4,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484126818440052797:queuedAftersLockedFormentak,Yes:mentakround2PO,None:scPlayMsgTime47,1773914651220:declinedAfters,mentak{usc}:startTimeOfRound3StatusScoring,1773914186736:mentakround4PO,Diversify{sp}Research:startTimeOfRound4StatusScoring,1773915207999:mentakplanetsExplored,vegamajor*:startTimeOfRound4Strategy,1773914640586:1484130357228867724SCReacts,{usc}mentak:startTimeOfRound4StatusHomework,1773915254148:startTimeOfRound2Strategy,1773130769688:startTimeOfRound4Agenda2,1773915374940:startTimeOfRound4Agenda1,1773915307595:scPlay1,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484133712122613921:
 thalnos_units 
 slash_command_string move_units,1:
 acs_sabod 
@@ -46,7 +46,7 @@ publicObjectives2 massive_cities,become_legend,galvanize,conquer,control_borderl
 so_to_po 
 purged_pn 
 publicObjectives1peakable 
-saved_buttons mentak;temporaryPingDisable;Disable Pings For Turn;DANGER,mentak;deleteButtons;Delete These Buttons;SECONDARY
+saved_buttons mentak;FFCC_mentak_landUnits_207_1mf_vegamajor_red;Land 1 Mech on Vega Major (2/1);DANGER;<:mech:1479342640460730398>,mentak;FFCC_mentak_spaceUnits_207_1mf_vegamajor_red;Un-land 1 Mech from Vega Major (2/1);SECONDARY;<:mech:1479342640460730398>,mentak;FFCC_mentak_spaceUnits_207_2mf_vegamajor_red;Un-land 2 Mech from Vega Major (2/1);SECONDARY;<:mech:1479342640460730398>,mentak;FFCC_mentak_spaceUnits_207_1gf_vegamajor_red;Un-land 1 Infantry from Vega Major (2/1);SECONDARY;<:infantry:1479342612141047828>,mentak;FFCC_mentak_landUnits_207_1mf_vegaminor_red;Land 1 Mech on Vega Minor (1/2);DANGER;<:mech:1479342640460730398>,mentak;FFCC_mentak_spaceUnits_207_1gf_vegaminor_red;Un-land 1 Infantry from Vega Minor (1/2);SECONDARY;<:infantry:1479342612141047828>,mentak;FFCC_mentak_doneLanding_207;Done Landing Troops;DANGER
 pinged_systems 
 publicObjectives2peakable distant_lands,vast_reserves,centralize_trade,golden_age
 publicObjectives1Peeked 
@@ -63,16 +63,16 @@ adjacencyOverrides
 creation_date 2026.03.09
 creation_date_time 1773057302496
 started_date 0
-last_modified_date 1774047576380
+last_modified_date 1773915831744
 ended_date 0
 round 5
-button_press_count 372
+button_press_count 360
 slash_command_count 1
 game_custom_name bleh
 table_talk_channel 1480534378663776489
 main_game_channel 1480534380698144950
 saved_channel 1480534380698144950
-saved_message <:Mentak:1479342907814318150><@533058401882603530> <:red:1479342216710328430>**Red**, if the game is not waiting on you, you may disable the auto ping for this turn so it doesn't annoy you. It will turn back on for the next turn.
+saved_message Moved all units to the space area.
 bot_map_channel 1480534382002573313
 game_launch_thread_id null
 is_tigl_game false
@@ -94,7 +94,7 @@ show_gears true
 show_banners true
 show_hex_borders off
 purged_fragment 3
-temporary_ping_disable true
+temporary_ping_disable false
 dominus_orb false
 component_action false
 just_played_component_ac false
@@ -232,7 +232,7 @@ plot_cards
 plot_factions 
 fragments hrf4
 relics titanprototype,metalivoidarmaments,lightrailordnance
-exhausted_relics titanprototype
+exhausted_relics 
 mahact_cc 
 franken_bag_to_pass 
 franken_personal_bag 
@@ -246,7 +246,7 @@ teammate_ids 533058401882603530
 tech_exhausted 
 tech_purged 
 planets mollprimus,kostboth,capha,vegamajor,vegaminor,wellon,mrte
-planets_exhausted vegamajor,capha
+planets_exhausted vegamajor
 planets_ability_exhausted mrte
 tactical_cc 2
 fleet_cc 4
@@ -256,7 +256,7 @@ trade_goods 0
 expected_hits_times_10 0
 total_expenses 56
 bonus_scored_secrets 0
-turn_count 4
+turn_count 2
 actual_hits 0
 stasis_infantry 0
 auto_sabo_pass_median 0
@@ -265,8 +265,8 @@ unit_cap
 secret_objectives uf,347;
 produced_units 
 secret_objectives_scored eap,288;
-number_of_turns 34
-total_turn_time 202458108
+number_of_turns 32
+total_turn_time 202095924
 strategy_card 1
 followed_sc 1
 player_stored_values 
@@ -361,7 +361,6 @@ red—cv 1,0,0,0
 -units-
 wellon
 red—gf 1,0,0,0
-red—pd 1,0,0,0
 -endunits-
 -planettokens-
 control_red.png
