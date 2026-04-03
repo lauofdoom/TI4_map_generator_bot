@@ -645,11 +645,12 @@ class GameSaveService {
         writer.write(System.lineSeparator());
 
         MiltyDraftManager manager = game.getMiltyDraftManagerUnsafe();
-        if (manager != null) {
-            writer.write(Constants.MILTY_DRAFT_MANAGER + " " + manager.superSaveMessage());
-            writer.write(System.lineSeparator());
-        } else {
-            writer.write(Constants.MILTY_DRAFT_MANAGER + " " + game.getMiltyDraftString());
+        String miltyDraftSaveString = manager != null ? manager.superSaveMessage() : game.getMiltyDraftString();
+        if ("error".equals(miltyDraftSaveString)) {
+            miltyDraftSaveString = game.getMiltyDraftString(); // preserve last good save on serialization failure
+        }
+        if (miltyDraftSaveString != null && !miltyDraftSaveString.equals("null")) {
+            writer.write(Constants.MILTY_DRAFT_MANAGER + " " + miltyDraftSaveString);
             writer.write(System.lineSeparator());
         }
 

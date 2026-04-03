@@ -453,10 +453,11 @@ public class Game extends GameProperties {
     public MiltyDraftManager getMiltyDraftManager() {
         if (miltyDraftManager == null) {
             miltyDraftManager = new MiltyDraftManager();
-            if (StringUtils.isNotBlank(miltyDraftString)) {
+            if (StringUtils.isNotBlank(miltyDraftString) && !"null".equals(miltyDraftString)) {
                 try {
                     miltyDraftManager.loadSuperSaveString(miltyDraftString);
                 } catch (Exception e) {
+                    BotLogger.error("Failed to load milty draft manager for game " + getName() + ": " + e.getMessage(), e);
                     miltyDraftManager = new MiltyDraftManager();
                 }
             }

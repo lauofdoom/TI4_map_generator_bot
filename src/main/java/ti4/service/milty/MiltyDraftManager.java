@@ -309,6 +309,11 @@ public class MiltyDraftManager {
     public void doMiltyPick(GenericInteractionCreateEvent event, Game game, String buttonID, Player player) {
         String userId = player.getUserID();
         MessageChannel mainGameChannel = game.getMainGameChannel();
+        if (players.isEmpty()) {
+            MessageHelper.sendMessageToChannel(mainGameChannel,
+                    "The milty draft state could not be loaded for this game. Please ping jazz for assistance.");
+            return;
+        }
         if (draftIndex >= draftOrder.size()) {
             FinishDraftService.finishDraft(event, this, game);
             return;
