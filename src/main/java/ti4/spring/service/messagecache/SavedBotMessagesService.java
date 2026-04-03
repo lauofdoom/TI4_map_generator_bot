@@ -7,11 +7,12 @@ import net.dv8tion.jda.api.entities.Message;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ti4.message.logging.BotLogger;
 import ti4.spring.context.SpringContext;
 
 @AllArgsConstructor
 @Service
-public class BotMessageCacheService {
+public class SavedBotMessagesService {
 
     private static final long RETENTION_MILLIS = Duration.ofHours(12).toMillis();
 
@@ -25,8 +26,12 @@ public class BotMessageCacheService {
         botDiscordMessageEntityRepository.save(record);
     }
 
-    private boolean isImportantMessage(Message message) {
+    public static boolean isImportantMessage(Message message) {
         if (message == null || message.isEphemeral() || !message.getAuthor().isBot()) return false;
+
+        long cutoff = System.currentTimeMillis() - RETENTION_MILLIS;
+        if (message.getTimeCreated().toInstant().toEpochMilli() < cutoff) return false;
+
         String content = message.getContentRaw();
         return content.contains("privately used the command:")
                 || content.contains("A command string message was deleted.")
@@ -45,10 +50,15 @@ public class BotMessageCacheService {
     @Transactional
     public void removeExpiredMessages() {
         long cutoff = System.currentTimeMillis() - RETENTION_MILLIS;
-        botDiscordMessageEntityRepository.deleteByCreatedAtEpochMillisLessThan(cutoff);
+        long deletedRowCount = botDiscordMessageEntityRepository.deleteByCreatedAtEpochMillisLessThan(cutoff);
+        BotLogger.info("Deleted " + deletedRowCount + " rows from the `bot_discord_message` table.");
     }
 
-    public static BotMessageCacheService getBean() {
-        return SpringContext.getBean(BotMessageCacheService.class);
+    public void remove(long messageId) {
+        botDiscordMessageEntityRepository.deleteById(messageId);
+    }
+
+    public static SavedBotMessagesService getBean() {
+        return SpringContext.getBean(SavedBotMessagesService.class);
     }
 }

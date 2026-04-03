@@ -1,6 +1,8 @@
 package ti4.helpers;
 
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.substringAfter;
+import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +63,7 @@ import ti4.service.unit.DestroyUnitService;
 import ti4.service.unit.ParsedUnit;
 import ti4.service.unit.RemoveUnitService;
 
-public class ButtonHelperHeroes {
+public final class ButtonHelperHeroes {
 
     public static void argentHeroStep1(Game game, Player player, GenericInteractionCreateEvent event) {
         List<Button> buttons = new ArrayList<>();
@@ -995,9 +997,9 @@ public class ButtonHelperHeroes {
         UnitHolder unitHolder = ButtonHelper.getUnitHolderFromPlanetName(planetName, game);
         StringBuilder destroyedUnits = new StringBuilder();
         for (Player p2 : game.getRealPlayers()) {
-            unitHolder.removeAllUnits(p2.getColor());
             destroyedUnits.append(unitHolder.getPlayersUnitListEmojisOnHolder(p2));
         }
+        DestroyUnitService.destroyAllUnits(event, game.getTileFromPlanet(planetName), game, unitHolder, false);
         String planetRep = Helper.getPlanetRepresentationPlusEmojiPlusResourceInfluence(planetName, game);
         String msg = player.getFactionEmoji() + " destroyed all units (" + destroyedUnits + ") on the planet "
                 + planetRep + " using the The Lady, a Ghemina hero.";
@@ -1627,8 +1629,9 @@ public class ButtonHelperHeroes {
                                         .append(overCapacity)
                                         .append(" fighter")
                                         .append(overCapacity == 1 ? "" : "s")
-                                        .append(" in excess of their fleet pool; removing"
-                                                + (tf ? "" : " and capturing") + ".\n");
+                                        .append(" in excess of their fleet pool; removing")
+                                        .append(tf ? "" : " and capturing")
+                                        .append(".\n");
                                 RemoveUnitService.removeUnit(
                                         event, tile, game, p2, unitHolder, UnitType.Fighter, overCapacity, false);
                                 if (!tf) {
@@ -1658,8 +1661,9 @@ public class ButtonHelperHeroes {
                                     .append(overCapacity)
                                     .append(" fighter")
                                     .append(overCapacity == 1 ? "" : "s")
-                                    .append(" in excess of their amended capacity; removing"
-                                            + (tf ? "" : " and capturing") + ".\n");
+                                    .append(" in excess of their amended capacity; removing")
+                                    .append(tf ? "" : " and capturing")
+                                    .append(".\n");
                             RemoveUnitService.removeUnit(
                                     event, tile, game, p2, unitHolder, UnitType.Fighter, overCapacity, false);
                             if (!tf) {
@@ -1675,8 +1679,9 @@ public class ButtonHelperHeroes {
                                     .append(overCapacity)
                                     .append(" mech")
                                     .append(overCapacity == 1 ? "" : "s")
-                                    .append(" in excess of their amended capacity; removing"
-                                            + (tf ? "" : " and capturing") + ".\n");
+                                    .append(" in excess of their amended capacity; removing")
+                                    .append(tf ? "" : " and capturing")
+                                    .append(".\n");
                             RemoveUnitService.removeUnit(
                                     event, tile, game, p2, unitHolder, UnitType.Mech, overCapacity, false);
                             if (!tf) {
@@ -1690,8 +1695,9 @@ public class ButtonHelperHeroes {
                             message.append(p2.getRepresentationNoPing())
                                     .append(" has ")
                                     .append(overCapacity)
-                                    .append(" infantry in excess of their amended capacity; removing"
-                                            + (tf ? "" : " and capturing") + ".\n");
+                                    .append(" infantry in excess of their amended capacity; removing")
+                                    .append(tf ? "" : " and capturing")
+                                    .append(".\n");
                             RemoveUnitService.removeUnit(
                                     event, tile, game, p2, unitHolder, UnitType.Infantry, overCapacity, false);
                             if (!tf) {
@@ -1721,8 +1727,9 @@ public class ButtonHelperHeroes {
                                         .append(overCapacity)
                                         .append(" ")
                                         .append(unitListing)
-                                        .append(" in excess of their amended (zero) capacity; removing"
-                                                + (tf ? "" : " and capturing") + ".\n");
+                                        .append(" in excess of their amended (zero) capacity; removing")
+                                        .append(tf ? "" : " and capturing")
+                                        .append(".\n");
                                 RemoveUnitService.removeUnit(
                                         event,
                                         tile,
@@ -2189,6 +2196,25 @@ public class ButtonHelperHeroes {
                     + ", The Oracle, the Naalu hero, has been played and you must send a promissory note. Please choose the promissory note you wish to send.";
             MessageHelper.sendMessageToChannelWithButtons(p1.getCardsInfoThread(), message, stuffToTransButtons);
         }
+        ButtonHelper.deleteMessage(event);
+    }
+
+    @ButtonHandler("poisonHeroInitiation")
+    public static void resolvePoisonHeroInitiation(Player player, Game game, ButtonInteractionEvent event) {
+        Leader playerLeader = player.unsafeGetLeader("poisonhero");
+        StringBuilder message2 = new StringBuilder(player.getRepresentation())
+                .append(" played ")
+                .append(Helper.getLeaderFullRepresentation(playerLeader));
+        boolean purged = player.removeLeader(playerLeader);
+        DSHelperBreakthroughs.doLanefirBtCheck(game, player);
+        if (purged) {
+            MessageHelper.sendMessageToChannel(
+                    player.getCorrectChannel(), message2 + " - The Oracle, the Poison hero, has been purged. \n\n ");
+        } else {
+            MessageHelper.sendMessageToChannel(
+                    event.getMessageChannel(), "The Oracle, the Poison hero, was not purged - something went wrong");
+        }
+        ButtonHelperTwilightsFallActionCards.resolvePoison(game, player);
         ButtonHelper.deleteMessage(event);
     }
 
@@ -2801,11 +2827,11 @@ public class ButtonHelperHeroes {
 
     public static void resolveBentorHero(Game game, Player player) {
         for (String planet : player.getPlanetsAllianceMode()) {
-            UnitHolder unitHolder = ButtonHelper.getUnitHolderFromPlanetName(planet, game);
+            Planet unitHolder = ButtonHelper.getUnitHolderFromPlanetName(planet, game);
             if (unitHolder == null) {
                 continue;
             }
-            Planet planetReal = (Planet) unitHolder;
+            Planet planetReal = unitHolder;
             List<Button> buttons = ButtonHelper.getPlanetExplorationButtons(game, planetReal, player);
             if (buttons != null && !buttons.isEmpty()) {
                 String message = "Click button to explore " + Helper.getPlanetRepresentation(planet, game);

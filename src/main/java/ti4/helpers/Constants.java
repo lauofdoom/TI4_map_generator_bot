@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Constants {
+public final class Constants {
     // Staff Pings
     public static final String chassitId = "183213554445320192";
     public static final String eronousId = "465241936408608769";
@@ -204,6 +204,7 @@ public class Constants {
     public static final String SETTING_TYPE = "setting_type";
 
     public static final String TOKEN_INGRESS = "token_ingress.png";
+    public static final String TOKEN_EGRESS = "token_egress.png";
     public static final String TOKEN_BREACH_ACTIVE = "token_breachActive.png";
     public static final String TOKEN_BREACH_INACTIVE = "token_breachInactive.png";
     public static final String TOKEN_SEVERED = "token_severed.png";
@@ -652,6 +653,7 @@ public class Constants {
     public static final String SEND_TG = "send_tg";
     public static final String SEND_COMMODITIES = "send_commodities";
     public static final String SETUP = "setup";
+    public static final String SETUP_STARTING_FLEET = "setup_starting_fleet";
     public static final String WEIRD_GAME_SETUP = "weird_game_setup";
     public static final String GALACTIC_EVENTS_SETUP = "galactic_events_setup";
     public static final String CUSTOMIZATION = "customization";
@@ -1339,6 +1341,7 @@ public class Constants {
     public static final String LIFETIME_RECORD = "lifetime_record";
     public static final String FACTION_RECORD_OF_TECH = "faction_record_of_tech";
     public static final String FACTION_RECORD_OF_SCPICK = "faction_record_of_scpick";
+    public static final String FACTION_TOP_COLORS = "faction_top_colors";
     public static final String SPENDS = "spends";
     public static final String TOP_LIMIT = "top_limit";
     public static final String MINIMUM_NUMBER_OF_TURNS = "minimum_number_of_turns";

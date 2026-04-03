@@ -29,6 +29,7 @@ import ti4.helpers.RelicHelper;
 import ti4.helpers.Units.UnitKey;
 import ti4.helpers.Units.UnitState;
 import ti4.helpers.Units.UnitType;
+import ti4.helpers.thundersedge.DSHelperBreakthroughs;
 import ti4.image.Mapper;
 import ti4.map.Game;
 import ti4.map.Leader;
@@ -114,6 +115,7 @@ public class PlayHeroService {
             String msg = leaderName + " has been purged.";
             if (!"mykomentorihero".equals(playerLeader.getId())) {
                 purged = player.removeLeader(playerLeader);
+                DSHelperBreakthroughs.doLanefirBtCheck(game, player);
                 ButtonHelperHeroes.checkForMykoHero(game, playerLeader.getId(), player);
             } else {
                 msg = "Coprinus Comatus, the Myko-Mentori hero, was used to copy another hero.";
@@ -167,7 +169,7 @@ public class PlayHeroService {
                     List<TechnologyModel> techs =
                             ListTechService.getAllTechOfAType(game, type.toString(), player, false, false, true);
                     for (TechnologyModel tech : techs) {
-                        if (tech.isUnitUpgrade() || tech.getFaction().isPresent()) {
+                        if (tech.isUnitUpgrade()) {
                             continue;
                         }
                         buttons.add(Buttons.gray(

@@ -29,6 +29,7 @@ import ti4.helpers.thundersedge.TeHelperTechs;
 import ti4.image.Mapper;
 import ti4.map.Game;
 import ti4.map.Player;
+import ti4.map.Tile;
 import ti4.message.MessageHelper;
 import ti4.message.logging.BotLogger;
 import ti4.model.StrategyCardModel;
@@ -182,9 +183,7 @@ public class PlayStrategyCardService {
         } else {
             Player propagationPlayer = Helper.getPlayerFromAbility(game, "propagation");
             if (propagationPlayer != null) {
-                boolean shouldAddNekroTechButton = scModel.usesAutomationForSCID("pok7technology")
-                        && !game.isFowMode()
-                        && !player.equals(propagationPlayer);
+                boolean shouldAddNekroTechButton = scModel.usesAutomationForSCID("pok7technology") && !game.isFowMode();
                 if (shouldAddNekroTechButton) {
                     String ffcc = propagationPlayer.getFinsFactionCheckerPrefix();
                     scButtons.add(Buttons.gray(ffcc + "nekroFollowTech", "Get Command Tokens", FactionEmojis.Nekro));
@@ -196,8 +195,7 @@ public class PlayStrategyCardService {
                 boolean shouldAddTitansMechDeployButton = (scModel.usesAutomationForSCID("pok4construction")
                                 || scModel.usesAutomationForSCID("te4construction"))
                         && !game.isFowMode()
-                        && !ButtonHelper.isLawInPlay(game, "articles_war")
-                        && !player.equals(titansMechPlayer);
+                        && !ButtonHelper.isLawInPlay(game, "articles_war");
                 if (shouldAddTitansMechDeployButton) {
                     String ffcc = titansMechPlayer.getFinsFactionCheckerPrefix();
                     scButtons.add(Buttons.gray(
@@ -360,12 +358,12 @@ public class PlayStrategyCardService {
                                     + "** with the _" + RelicHelper.sillySpelling() + "_.",
                             empNMahButtons);
                 }
-                if (player3.hasUnexhaustedLeader("mahactagent")
-                        && !ButtonHelper.getTilesWithYourCC(player, game, event).isEmpty()) {
-                    if (scModel.usesAutomationForSCID("pok6warfare")
-                            && ButtonHelper.getTilesWithYourCC(player, game, event)
-                                            .size()
-                                    == 1) {
+                if (player3.hasUnexhaustedLeader("mahactagent")) {
+                    List<Tile> tilesWithPrimaryPlayersCC = ButtonHelper.getTilesWithYourCC(player, game, event);
+                    boolean primaryPlayerHasAnyCCInPlay = !tilesWithPrimaryPlayersCC.isEmpty();
+                    boolean primaryPlayerHasExactlyOneCCInPlay = tilesWithPrimaryPlayersCC.size() == 1;
+                    if (!primaryPlayerHasAnyCCInPlay
+                            || scModel.usesAutomationForSCID("pok6warfare") && primaryPlayerHasExactlyOneCCInPlay) {
                         continue;
                     }
                     empNMahButtons.addFirst(
@@ -470,10 +468,10 @@ public class PlayStrategyCardService {
             message.addReaction(reactionEmoji).queue(Consumers.nop(), BotLogger::catchRestError);
             player.addFollowedSC(scToPlay, event);
         }
-        if (!game.isFowMode()
-                && !"pbd1000".equalsIgnoreCase(game.getName())
-                && !game.isHomebrewSCMode()
-                && !"pbd100two".equalsIgnoreCase(game.getName())) {
+        boolean isSpecialPbdGame =
+                "pbd1000".equalsIgnoreCase(game.getName()) || "pbd100two".equalsIgnoreCase(game.getName());
+        if (!game.isFowMode() && !isSpecialPbdGame && !game.isHomebrewSCMode()) {
+            boolean primaryHasAcq = player.ownsPromissoryNote("acq");
             for (Player p2 : game.getRealPlayers()) {
                 if (p2 == player) {
                     continue;
@@ -499,11 +497,11 @@ public class PlayStrategyCardService {
                 if (scToPlay == 5) {
                     continue;
                 }
-                if (!player.ownsPromissoryNote("acq")
+                List<Integer> unfollowedSCs = p2.getUnfollowedSCs();
+                if (!primaryHasAcq
                         && p2.getStrategicCC() == 0
-                        && !p2.getUnfollowedSCs().contains(1)
-                        && (!p2.getTechs().contains("iihq")
-                                || !p2.getUnfollowedSCs().contains(8))
+                        && !unfollowedSCs.contains(1)
+                        && (!p2.getTechs().contains("iihq") || !unfollowedSCs.contains(8))
                         && !p2.hasRelicReady("absol_emelpar")
                         && !p2.hasRelicReady("emelpar")
                         && !p2.hasUnexhaustedLeader("mahactagent")
@@ -617,7 +615,9 @@ public class PlayStrategyCardService {
             ThreadChannelAction threadChannel = mainGameChannel.createThreadChannel(threadName, message.getId());
             threadChannel = threadChannel.setAutoArchiveDuration(ThreadChannel.AutoArchiveDuration.TIME_24_HOURS);
             threadChannel.queue(m5 -> {
-                if (Constants.VERBOSITY_VERBOSE.equals(game.getOutputVerbosity()) && scModel.hasImageFile()) {
+                if (Constants.VERBOSITY_VERBOSE.equals(game.getOutputVerbosity())
+                        && scModel.hasImageFile()
+                        && player.getSCs().contains(scToPlay)) {
                     MessageHelper.sendMessageToChannel(m5, scModel.getImageFileUrl());
                     if (ShouldPrintFollowOrder(game, scModel)) {
                         List<Player> playersInOrder = getPlayersInFollowOrder(game, player);
@@ -775,7 +775,7 @@ public class PlayStrategyCardService {
         Button pdsButton = Buttons.green("construction_pds", "Place a PDS", UnitEmojis.pds);
         Button noFollowButton = Buttons.blue("sc_no_follow_" + sc, "Not Following");
         if (game.isMonumentToTheAgesMode()) {
-            Button facilityButton = Buttons.green("construction_agesmonument", "Place A Monument (Cost 5 Resources)");
+            Button facilityButton = Buttons.green("construction_agesmonument", "Place A Monument (Cost 5 TG)");
             return List.of(followButton, buildButton, sdButton, pdsButton, facilityButton, noFollowButton);
         }
         return List.of(followButton, buildButton, sdButton, pdsButton, noFollowButton);
@@ -992,7 +992,7 @@ public class PlayStrategyCardService {
             return List.of(followButton, sdButton, pdsButton, facilityButton, noFollowButton);
         }
         if (game.isMonumentToTheAgesMode()) {
-            Button facilityButton = Buttons.green("construction_agesmonument", "Place A Monument (Cost 5 Resources)");
+            Button facilityButton = Buttons.green("construction_agesmonument", "Place A Monument (Cost 5 TG)");
             return List.of(followButton, sdButton, pdsButton, facilityButton, noFollowButton);
         }
         return List.of(followButton, sdButton, pdsButton, noFollowButton);

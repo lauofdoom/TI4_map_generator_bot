@@ -78,7 +78,6 @@ import ti4.message.logging.LogOrigin;
 import ti4.model.ActionCardModel;
 import ti4.model.BorderAnomalyHolder;
 import ti4.model.BorderAnomalyModel;
-import ti4.model.ColorModel;
 import ti4.model.DeckModel;
 import ti4.model.ExploreModel;
 import ti4.model.FactionModel;
@@ -960,7 +959,7 @@ public class Game extends GameProperties {
         return tt.getJumpUrl();
     }
 
-    private String getTabletalkJumpLinkFormatted() {
+    public String getTabletalkJumpLinkFormatted() {
         TextChannel tt = getTableTalkChannel();
         if (tt == null) return "[no tt]";
         return String.format("[__[Tabletalk](%s)__]", tt.getJumpUrl());
@@ -972,7 +971,7 @@ public class Game extends GameProperties {
         return act.getJumpUrl();
     }
 
-    private String getActionsJumpLinkFormatted() {
+    public String getActionsJumpLinkFormatted() {
         TextChannel act = getActionsChannel();
         if (act == null) return "[no actions]";
         return String.format("[__[Actions](%s)__]", act.getJumpUrl());
@@ -1109,6 +1108,10 @@ public class Game extends GameProperties {
 
     public void setStoredValue(String key, String value) {
         if (value == null) return;
+        if (value.isEmpty()) {
+            removeStoredValue(key);
+            return;
+        }
         value = StringHelper.escape(value);
         checkingForAllReacts.put(key, value);
     }
@@ -1771,7 +1774,7 @@ public class Game extends GameProperties {
             return ButtonHelper.isCoatlHealed(this);
         }
         if (isTwilightsFallMode()) {
-            return getTyrant() != null;
+            return getTyrant() != null && !getTyrant().isEliminated();
         }
         if (isLiberationC4Mode()) {
             return true;
@@ -2568,10 +2571,10 @@ public class Game extends GameProperties {
             String id = getActionCards().getFirst();
             if (player.hasAbility("deceive")) {
                 ButtonHelperFactionSpecific.resolveDeceive(player, this);
-            } else {
-                getActionCards().remove(id);
-                player.setActionCard(id);
             }
+            getActionCards().remove(id);
+            player.setActionCard(id);
+
             return player.getActionCards();
         }
 
@@ -4586,26 +4589,6 @@ public class Game extends GameProperties {
                 .getStrategyCardModels()
                 .forEach(scModel ->
                         setScTradeGood(scModel.getInitiative(), oldTGs.getOrDefault(scModel.getInitiative(), 0)));
-    }
-
-    public List<ColorModel> getUnusedColorsPreferringBase() {
-        List<String> priorityColourIDs = List.of("red", "blue", "yellow", "purple", "green", "orange", "pink", "black");
-        List<ColorModel> priorityColours = priorityColourIDs.stream()
-                .map(Mapper::getColor)
-                .filter(color -> players.values().stream()
-                        .noneMatch(player -> player.getColor().equals(color.getName())))
-                .toList();
-        if (!priorityColours.isEmpty()) {
-            return priorityColours;
-        }
-        return getUnusedColors();
-    }
-
-    public List<ColorModel> getUnusedColors() {
-        return Mapper.getColors().stream()
-                .filter(color -> players.values().stream()
-                        .noneMatch(player -> player.getColor().equals(color.getName())))
-                .toList();
     }
 
     public boolean addTag(String tag) {
