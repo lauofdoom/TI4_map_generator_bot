@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git pull --rebase)",
       "Bash(git push origin master)",
-      "Bash(git filter-branch --force --index-filter \"git rm --cached --ignore-unmatch .env\" --prune-empty --tag-name-filter cat -- --all)"
+      "Bash(git filter-branch --force --index-filter \"git rm --cached --ignore-unmatch .env\" --prune-empty --tag-name-filter cat -- --all)",
+      "Bash(git commit -m ':*)"
     ]
   }
 }
