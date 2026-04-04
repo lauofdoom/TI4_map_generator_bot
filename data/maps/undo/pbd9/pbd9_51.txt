@@ -63,10 +63,10 @@ adjacencyOverrides
 creation_date 2026.04.03
 creation_date_time 1775216125992
 started_date 0
-last_modified_date 1775265111274
+last_modified_date 1775265076888
 ended_date 0
 round 1
-button_press_count 44
+button_press_count 42
 slash_command_count 4
 game_custom_name chatmypants3
 table_talk_channel 1489589140269043844

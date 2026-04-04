@@ -60,6 +60,7 @@ public class MiltyDraftHelper {
         MapTemplateModel mapTemplate = Mapper.getMapTemplate(manager.getMapTemplate());
 
         int sliceCount = slices.size();
+        if (sliceCount == 0) return FileUploadService.createFileUpload(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), game.getName() + "_miltydraft");
         int spanW = (int) Math.ceil(Math.sqrt(sliceCount));
         int spanH = (sliceCount + spanW - 1) / spanW;
 
@@ -413,11 +414,12 @@ public class MiltyDraftHelper {
 
         String mapTemplate = manager.getMapTemplate();
         if (mapTemplate == null) {
-            MapTemplateModel defaultTemplate = Mapper.getDefaultMapTemplateForPlayerCount(
-                    manager.getPlayers().size());
+            int playerCount = manager.getPlayers().isEmpty()
+                    ? game.getRealPlayers().size()
+                    : manager.getPlayers().size();
+            MapTemplateModel defaultTemplate = Mapper.getDefaultMapTemplateForPlayerCount(playerCount);
             if (defaultTemplate == null) {
-                throw new Exception("idk how to build this map yet: " + game.getName() + ", players: "
-                        + manager.getPlayers().size());
+                throw new Exception("idk how to build this map yet: " + game.getName() + ", players: " + playerCount);
             }
             mapTemplate = defaultTemplate.getAlias();
         }

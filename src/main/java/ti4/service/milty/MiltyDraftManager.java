@@ -611,26 +611,28 @@ public class MiltyDraftManager {
     }
 
     public void loadSuperSaveString(String saveString) throws Exception {
-        StringTokenizer bigTokenizer = new StringTokenizer(saveString, "|");
-        boolean ignoreMessageIDs = false;
-        if (bigTokenizer.countTokens() == 5) {
-            ignoreMessageIDs = true;
-        } else if (bigTokenizer.countTokens() != 6) {
+        // Use split with -1 limit to preserve empty fields (StringTokenizer skips them)
+        String[] parts = saveString.split("\\|", -1);
+        if (parts.length == 5) {
+            // current format: slices|factions|players|picks|template
+        } else if (parts.length == 6) {
+            // legacy format with message IDs (deprecated)
+        } else {
             throw new Exception("Bad milty draft save string: " + saveString);
         }
 
         // Slices
-        String slices = bigTokenizer.nextToken();
+        String slices = parts[0];
         loadSlicesFromString(slices);
 
         // Factions
-        String factionStr = bigTokenizer.nextToken();
-        List<String> factions = new ArrayList<>(Arrays.asList(factionStr.split(",")));
+        String factionStr = parts[1];
+        List<String> factions = factionStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(factionStr.split(",")));
         setFactionDraft(factions);
 
         // Players
-        String playersStr = bigTokenizer.nextToken();
-        List<String> players = new ArrayList<>(Arrays.asList(playersStr.split(",")));
+        String playersStr = parts[2];
+        List<String> players = playersStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(playersStr.split(",")));
         List<String> playersReversed = new ArrayList<>(players);
         Collections.reverse(playersReversed);
         List<String> draftOrder = new ArrayList<>(players);
@@ -640,7 +642,7 @@ public class MiltyDraftManager {
         setPlayers(players);
 
         // Picks
-        String picksStr = bigTokenizer.nextToken();
+        String picksStr = parts[3];
         StringTokenizer pickTokenizer = new StringTokenizer(picksStr, ";");
         int index = 0;
         while (pickTokenizer.hasMoreTokens()) {
@@ -652,15 +654,9 @@ public class MiltyDraftManager {
             index++;
         }
 
-        // if (!ignoreMessageIDs) {
-        // DEPRECATED
-        // StringTokenizer messageIds =
-        // new StringTokenizer(bigTokenizer.nextToken(), ",");
-        // }
-
         // Map Template
-        String savedTemplate = bigTokenizer.nextToken();
-        setMapTemplate(savedTemplate);
+        String savedTemplate = parts[4];
+        setMapTemplate("null".equals(savedTemplate) || savedTemplate.isEmpty() ? null : savedTemplate);
     }
 
     public void loadSlicesFromString(String str) throws Exception {

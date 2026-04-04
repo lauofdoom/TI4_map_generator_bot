@@ -3,7 +3,7 @@ Lau
 pbd9
 -mapinfo-
 -gameinfo-
-latest_command lau2628 pressed button: showMiltyDraft -- Show draft again
+latest_command lau2628 pressed button: miltyFactionInfo_remaining -- Remaining faction info
 phase_of_game 
 latest_outcome_voted_for 
 secret_objectives ose,gamf,dtgs,lsc,mp,baf,fc,dtd,csl,eh,sai,dfat,uf,te,pe,ctr,ttfd,sar,sb,mew,mlp,btgk,dhw,dts,eap,fsn,btv,bam,fwm,fwp,mtm,dyp,otf,mrm,syc,faa,ans,pem,dp,hrm
@@ -63,10 +63,10 @@ adjacencyOverrides
 creation_date 2026.04.03
 creation_date_time 1775216125992
 started_date 0
-last_modified_date 1775265111274
+last_modified_date 1775265101708
 ended_date 0
 round 1
-button_press_count 44
+button_press_count 43
 slash_command_count 4
 game_custom_name chatmypants3
 table_talk_channel 1489589140269043844
