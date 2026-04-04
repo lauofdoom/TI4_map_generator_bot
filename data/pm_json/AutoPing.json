@@ -1,9 +1,3 @@
 {
-  "gameNameToAutoPing" : {
-    "pbd6" : {
-      "lastPingTimeEpochMilliseconds" : 1774047576376,
-      "pingCount" : 3,
-      "quickPing" : false
-    }
-  }
+  "gameNameToAutoPing" : { }
 }

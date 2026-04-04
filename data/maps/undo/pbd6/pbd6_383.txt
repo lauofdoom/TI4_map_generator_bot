@@ -3,7 +3,7 @@ Lau
 pbd6
 -mapinfo-
 -gameinfo-
-latest_command lau2628 used: /game end confirm: YES
+latest_command lau2628 pressed button: temporaryPingDisable -- Disable Pings For Turn
 phase_of_game action
 latest_outcome_voted_for for
 secret_objectives csl,ctr,sb,sai,mlp,fwp,eh,syc,bam,fwm,ose,faa,mtm,fc,mew,otf,dts,pe,ttfd,mp,dp,fsn,ans,dtd,lsc,dfat,mrm,te,btv,dyp,hrm,pem,sar,dhw,gamf,baf,btgk,dtgs
@@ -17,7 +17,7 @@ speaker 533058401882603530
 tyrant 
 active_player 533058401882603530
 active_system 
-auto_ping 0
+auto_ping 12
 players_who_hit_persistent_no_after 
 players_who_hit_persistent_no_when 
 current_agenda_info Directive_For/Against_362_cladenstine
@@ -27,7 +27,7 @@ sc_played 1,true;4,false;6,false;7,false;8,false;
 agenda_vote_info for,mentak_1:
 check_reacts_info scPlayMsgID6,1480792724436160563:scPlayMsgID7,1484130357228867724:scPlayMsgTime51,1773915451109:newStatusScoringMode,Yes:scPlayMsgID4,1484126818440052797:agendaRes430,mentak28:mentakround1SO,None:agendaRes310,mentak907:agendaRes431,for362:scPlayMsgID1,1484133712122613921:scPlayMsgTime16,1773118897519:mentakround3SO,Establish{sp}a{sp}Perimeter:whensResolved,Yes:startTimeOfRound2StatusHomework,1773205264551:originalCCsFormentak,0/4/0:startTimeOfRound5Strategy,1773915435314:startTimeOfRound2StatusScoring,1773205254973:declinedWhens,mentak{usc}:startTimeOfRound3StatusHomework,1773914229387:Round5SCPickFormentak,1:1484126824500957184SCReacts,{usc}mentak{usc}mentak:agendaRes320,7241:Round2SCPickFormentak,8:mentakround1PO,None:startTimeOfRound1StatusHomework,1773124308780:agendaCount,2:mentakround3PO,Build{sp}Defenses:startTimeOfRound3Strategy,1773205291383:scPlayMsgTime28,1773205196185:1481154686563123354SCReacts,{usc}mentak:lastActiveSystem,000:startTimeOfRound3Agenda1,1773914269768:startTimeOfRound3Agenda2,1773914396330:factionsThatAreNotDiscardingSOs,mentak*:startTimeOfRound1Strategy,1773094110561:IslandMode,true:Round3SCPickFormentak,4:scPlayMsgID8,1481154686563123354:1484130363013075007SCReacts,{usc}mentak:1481154686563123354soSCReacts,{usc}mentak:queuedAgendasMode,Yes:Round4SCPickFormentak,7:aftersResolved,Yes:latestOutcomeVotedFormentak,for:mentakround2SO,None:revealedPOInRound1,Yes:mentakround4SO,None:scPlayMsgTime34,1773913807449:revealedPOInRound3,Yes:revealedPOInRound2,Yes:revealedPOInRound4,Yes:lawsDisabled,no:startTimeOfRound1StatusScoring,1773124290187:revealedFlop1,Yes:Round1SCPickFormentak,6:lastAgendaReactTime,1773915374936:scPlay8,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1481154686563123354:passOnAllWhensNAftersmentak,Yes:scPlay6,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1480792724436160563:scPlay7,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484130357228867724:scPlay4,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484126818440052797:queuedAftersLockedFormentak,Yes:mentakround2PO,None:scPlayMsgTime47,1773914651220:declinedAfters,mentak{usc}:startTimeOfRound3StatusScoring,1773914186736:mentakround4PO,Diversify{sp}Research:startTimeOfRound4StatusScoring,1773915207999:startTimeOfRound4Strategy,1773914640586:1484130357228867724SCReacts,{usc}mentak:startTimeOfRound4StatusHomework,1773915254148:startTimeOfRound2Strategy,1773130769688:startTimeOfRound4Agenda2,1773915374940:startTimeOfRound4Agenda1,1773915307595:scPlay1,https{cln}//discord.com/channels/901547041866526800/1480534380698144950/1484133712122613921:
 thalnos_units 
-slash_command_string move_units,1:game end,2:
+slash_command_string move_units,1:
 acs_sabod 
 displaced_units_activation_new {}
 agendas arms_reduction,redistribution,revolution,rep_govt,arbiter,mutiny,plowshares,minister_war,economic_equality,covert,grant_reallocation,conscription,schematics,articles_war,abolishment,miscount,disarmament,prophecy,unconventional,nexus,committee,standardization,constitution,defense_act,conventions,minister_peace,incentive,wormhole_research,artifact,seed_empire,travel_ban,classified,regulations,execution,minister_policy,sanctions,minister_industry,minister_exploration,warrant,minister_sciences,wormhole_recon,rearmament,secret,checks,minister_commerce,shared_research
@@ -63,11 +63,11 @@ adjacencyOverrides
 creation_date 2026.03.09
 creation_date_time 1773057302496
 started_date 0
-last_modified_date 1775210287758
-ended_date 1775210287742
+last_modified_date 1775014298051
+ended_date 0
 round 5
 button_press_count 379
-slash_command_count 3
+slash_command_count 1
 game_custom_name bleh
 table_talk_channel 1480534378663776489
 main_game_channel 1480534380698144950
@@ -174,7 +174,7 @@ milty_draft_manager 19,74,108,78,39;40,106,65,76,117|titans,mentak|5330584018826
 milty_draft_settings {"draftMode":{"id":"DraftType","chosenKey":"milty"},"gameSettings":{"alliance":{"id":"Alliance","val":false},"decks":{"actionCards":{"id":"ACs","chosenKey":"action_cards_pok"},"agendas":{"id":"Agendas","chosenKey":"agendas_pok"},"explores":{"id":"Explores","chosenKey":"explores_pok"},"menuId":"decks","relics":{"id":"Relics","chosenKey":"relics_pok_te"},"secrets":{"id":"SecretDeck","chosenKey":"secret_objectives_pok"},"stage1":{"id":"Stg1Deck","chosenKey":"public_stage_1_objectives_pok"},"stage2":{"id":"Stg2Deck","chosenKey":"public_stage_2_objectives_pok"},"stratCards":{"id":"StratCards","chosenKey":"te"},"techs":{"id":"Techs","chosenKey":"techs_pok_c4"}},"mapTemplate":{"id":"Template","chosenKey":"1pIsland"},"menuId":"game","nucleusTemplatePredicate":{},"pointTotal":{"id":"Points","val":10},"secrets":{"id":"Secrets","val":3},"stage1s":{"id":"Stage1s","val":5},"stage2s":{"id":"Stage2s","val":5},"tigl":{"id":"TIGL","val":false},"tiglFractured":{"id":"TIGL Fractured","val":false}},"menuId":"main","messageId":"1480534743065038849","playerSettings":{"banFactions":{"id":"BanFactions","keys":[]},"gamePlayers":{"id":"Players","keys":["533058401882603530"]},"menuId":"players","presetDraftOrder":{"id":"StaticOrder","val":false},"priFactions":{"id":"PriFactions","keys":[]}},"sliceSettings":{"extraWorms":{"id":"ExtraWH","val":true},"menuId":"slice","minimumInf":{"id":"MinInf","val":3},"minimumRes":{"id":"MinRes","val":2},"numFactions":{"id":"#Factions","val":2},"numLegends":{"id":"Legends","valLow":1,"valHigh":2},"numSlices":{"id":"#Slices","val":2},"presetSlices":null,"totalValue":{"id":"TotVal","valLow":9,"valHigh":13}},"sourceSettings":{"absol":{"id":"Absol","val":false},"actionCardDeck2":{"id":"ActionCardDeck2","val":false},"base":{"id":"BaseGame","val":true},"betaTestMode":{"id":"Beta","val":false},"codexes":{"id":"Codexes","val":true},"discoStars":{"id":"DiscoStars","val":false},"eronous":{"id":"Eronous","val":false},"ignis":{"id":"Ignis","val":false},"menuId":"source","pok":{"id":"PoK","val":true},"teDemo":{"id":"ThundersEdge","val":false},"unchartedSpace":{"id":"UnchartSpace","val":false}}}
 strategy_card_set te
 border_anomalies []
-game_has_ended true
+game_has_ended false
 image_gen_count 0
 run_data_migrations 
 priority_track_mode NONE

@@ -1,0 +1,714 @@
+533058401882603530
+Lau
+pbd9
+-mapinfo-
+-gameinfo-
+latest_command lau2628 pressed button: jmfN_main_0 -- Go back to Draft Settings
+phase_of_game 
+latest_outcome_voted_for 
+secret_objectives ose,gamf,dtgs,lsc,mp,baf,fc,dtd,csl,eh,sai,dfat,uf,te,pe,ctr,ttfd,sar,sb,mew,mlp,btgk,dhw,dts,eap,fsn,btv,bam,fwm,fwp,mtm,dyp,otf,mrm,syc,faa,ans,pem,dp,hrm
+action_cards war_rider,sabo3,mining_initiative,rout,diplo_rider,abs,disgrace,const_rider,veto,war_machine1,fsb,coup,s_retreat4,dp1,imp_rider,fs1,probe,f_conscription,disable,insider,silence_space,f_deployment,war_machine3,seize,repeal,meltdown,plague,cripple,upgrade,reflective,mb1,assassin,nav_suite,dh3,ghost_ship,hack,confusing,mjets1,fire_team,industrial_initiative,lead_rider,intercept,spy,sh4,sh2,refit,emergency,summit,plagiarize,harness,experimental,divert_funding,counterstroke,sabo1,rally,impersonation,reverse_engineer,sh3,s_retreat1,solar_flare,s_retreat3,f_researched,scuttle,dp2,master_plan,dh4,dp4,salvage,decoy,bribery,mjets4,tech_rider,mb2,waylay,unexpected,war_machine4,dh1,messiah,mb4,unstable,deadly_plot,bunker,sh1,reparations,parley,confounding,sabo2,fs3,politic_rider,arch_expedition,economic_initiative,uprising,sabo4,mjets3,war_machine2,dh2,mjets2,lucky,stability,courageous,s_retreat2,insub,sanction,f_prototype,scramble,lost_star,mb3,jamming,fs4,fs2,reveal_prototype,infiltrate,ghost_squad,blitz,distinguished,tactical,dp3,trade_rider,war_effort,investments
+action_cards_discarded 
+action_cards_status 
+explore lc1,dv1,crf2,mo2,toe,pw,crf3,lf2,hrf1,exp1,vfs3,dw,crf8,aw4,crf4,fb2,dmz,minent,lf4,irf3,frln3,ent,cybernetic,aw3,vfs2,mo3,ed1,gw,urf3,exp2,vfs1,crf7,crf1,ion,rw,urf1,fb1,majent,propulsion,lf1,ms2,hrf3,frln1,mirage,cm3,crf5,ed2,cm1,lf3,fb4,exp3,irf2,gamma,irf1,ms1,irf4,hrf6,crf6,frln2,mw,aw2,lc2,urf2,crf9,warfare,fb3,kel1,ds,hrf2,mo1,biotic,dv2,hrf4,hrf7,aw1,hrf5,ls,cm2,kel2,irf5
+relics mawofworlds,dynamiscore,metalivoidshielding,lightrailordnance,nanoforge,prophetstears,quantumcore,shard,codex,heartofixth,thetriad,neuraloop,bookoflatvinia,dominusorb,thesilverflame,emelpar,emphidia,titanprototype,thalnos,circletofthevoid,metalivoidarmaments,obsidian,stellarconverter
+discarded_explores 
+speaker 
+tyrant 
+active_player null
+active_system null
+auto_ping 12
+players_who_hit_persistent_no_after 
+players_who_hit_persistent_no_when 
+current_agenda_info 
+current_acdrawstatus_info 
+last_active_player_change 0
+sc_played 
+agenda_vote_info 
+check_reacts_info 
+thalnos_units 
+slash_command_string draft manage add_all_game_players,3:game add,1:
+acs_sabod 
+displaced_units_activation_new {}
+agendas minister_policy,revolution,minister_exploration,standardization,committee,arms_reduction,unconventional,plowshares,minister_sciences,constitution,conventions,articles_war,rep_govt,minister_peace,mutiny,warrant,crisis,execution,censure,shared_research,schematics,artifact,incentive,secret,redistribution,economic_equality,travel_ban,wormhole_recon,minister_industry,classified,abolishment,cladenstine,regulations,prophecy,sanctions,checks,nexus,conscription,arbiter,rearmament,disarmament,miscount,minister_antiquities,seed_empire,grant_reallocation,defense_act,wormhole_research,covert,minister_commerce,minister_war
+discarded_agendas 
+sent_agenda 
+law 
+events_in_effect 
+events 
+discarded_events 
+law_info 
+sc_trade_goods 1,0;2,0;3,0;4,0;5,0;6,0;7,0;8,0;
+revealedPublicObjectives Custodian/Imperial,0;Stellar Atomics,1;
+customPublicVP Custodian/Imperial,1;Stellar Atomics,0;
+publicObjectives1 push_boundaries,infrastructure,diversify,monument,develop,build_defenses,deep_space,lost_outposts,sway_council,research_outposts,corner,lead,trade_routes,engineer_marvel,outer_rim
+publicObjectives2 command_armada,golden_age,ancient_monuments,supremacy,galvanize,master_science,manipulate_law,revolutionize,brain_trust,unify_colonies,subdue,massive_cities,protect_border,distant_lands,vast_reserves
+so_to_po 
+purged_pn 
+publicObjectives1peakable intimidate,make_history,expand_borders,amass_wealth,raise_fleet
+saved_buttons null;jmfN_main_0;Go back to Draft Settings;PRIMARY;💾,null;jmfA_main.slice_scpt2025finals;SCPT 2025 Finals;SECONDARY;<:scpt:1289722139750039634>,null;jmfA_main.slice_richPreset;Rich galaxy;DANGER;<:tg:1479341700391501935>,null;jmfA_main.slice_poorPreset;Poor galaxy;DANGER;<:comm:1479340363746381855>,null;jmfA_main.slice_presetSlices~MDL;Use preset slices;PRIMARY;<:sliceA:1479341403049037940>,null;jmfA_main.slice_reset;Reset to default settings;DANGER,null;jmfA_main.slice_inc#Factions;Increase Number of Factions;SUCCESS;📈,null;jmfA_main.slice_dec#Factions;Decrease Number of Factions;DANGER;📉,null;jmfA_main.slice_inc#Slices;Increase Number of Slices;SUCCESS;📈,null;jmfA_main.slice_dec#Slices;Decrease Number of Slices;DANGER;📉,null;jmfA_main.slice_incMinRes;Increase Min Optimal Res;SUCCESS;📈,null;jmfA_main.slice_decMinRes;Decrease Min Optimal Res;DANGER;📉,null;jmfA_main.slice_incMinInf;Increase Min Optimal Inf;SUCCESS;📈,null;jmfA_main.slice_decMinInf;Decrease Min Optimal Inf;DANGER;📉,null;jmfA_main.slice_incLowTotVal;Increase Min Total Optimal Value;SUCCESS;📈,null;jmfA_main.slice_decLowTotVal;Decrease Min Total Optimal Value;DANGER;📉,null;jmfA_main.slice_incHighTotVal;Increase Max Total Optimal Value;SUCCESS;📈,null;jmfA_main.slice_decHighTotVal;Decrease Max Total Optimal Value;DANGER;📉,null;jmfA_main.slice_togExtraWH;Disable More Wormholes;DANGER;🔁,null;jmfA_main.slice_incLowLegends;Increase Min Legendary Count;SUCCESS;📈,null;jmfA_main.slice_decLowLegends;Decrease Min Legendary Count;DANGER;📉,null;jmfA_main.slice_incHighLegends;Increase Max Legendary Count;SUCCESS;📈,null;jmfA_main.slice_decHighLegends;Decrease Max Legendary Count;DANGER;📉
+pinged_systems 
+publicObjectives2peakable control_borderlands,vast_territories,conquer,centralize_trade,become_legend
+publicObjectives1Peeked 
+publicObjectives2Peeked 
+sc_count_for_map 2
+player_count_for_map 4
+vp_count 10
+max_so_count 3
+scoredPublicObjectives 
+customAdjacentTiles 
+customHyperlaneData 
+reverse_speaker_order false
+adjacencyOverrides 
+creation_date 2026.04.03
+creation_date_time 1775216125992
+started_date 0
+last_modified_date 1775216763943
+ended_date 0
+round 1
+button_press_count 28
+slash_command_count 4
+game_custom_name chatmypants3
+table_talk_channel 1489589140269043844
+main_game_channel 1489589141984247980
+saved_channel 1489589141984247980
+saved_message # **__Draft settings:__**
+- *Advanced settings to fine-tune how rich the galaxy will be*
+> ` Number of Factions`: 9 *(limits=[2-24], default=6)*
+> `   Number of Slices`: 5
+> `    Min Optimal Res`<:resources:1479341727981764660>: 2
+> `    Min Optimal Inf`<:influence:1479340659428167751>: 3
+> `Total Optimal Value`<:ResInf:1479340358541246487>: [9-13]
+> `     More Wormholes`<:WHalpha:1479342308918038539>: ✅
+> `    Legendary Count`<:LegendaryPlanet:1479340946457100329>: [1-2]
+bot_map_channel 1489589143490138222
+game_launch_thread_id null
+is_tigl_game false
+community_mode false
+alliance_mode false
+fow_mode false
+replacement_made false
+fow_options 
+naalu_agent false
+warfare_action false
+l1_hero false
+nomad_coin false
+fast_sc_follow false
+queue_so true
+show_bubbles true
+transaction_method true
+homebrew_mode false
+show_gears true
+show_banners true
+show_hex_borders off
+purged_fragment 0
+temporary_ping_disable false
+dominus_orb false
+component_action false
+just_played_component_ac false
+activation_count 0
+base_game_mode false
+thunders_edge_mode true
+twilights_fall_mode false
+light_fog_mode false
+cpti_explore_mode false
+red_tape_mode false
+omega_phase_mode false
+strat_pings true
+absol_mode false
+votc_mode false
+miltymod_mode false
+promises_promises false
+flagshipping false
+show_map_setup false
+text_size medium
+discordant_stars_mode false
+uncharted_space_stuff false
+verbosity verbose
+beta_test_mode false
+age_of_exploration_mode false
+facilities_mode false
+minor_factions_mode false
+hidden_agenda_mode false
+total_war_mode false
+dangerous_wilds_mode false
+stellar_atomics_mode true
+age_of_fighters_mode false
+zealous_orthodoxy_mode false
+advent_of_the_warsun_mode false
+cultural_exchange_program_mode false
+conventions_of_war_abandoned_mode false
+rapid_mobilization_mode false
+monuments_to_the_ages_mode false
+weird_wormholes_mode false
+no_fracture false
+call_of_the_void_mode false
+wild_wild_galaxy_mode false
+cosmic_phenomenae_mode false
+mercenaries_for_hire_mode false
+civilized_society_mode true
+no_swap_mode false
+veiled_heart_mode false
+limited_whispers_mode false
+age_of_commerce_mode false
+ordinian_c1_mode false
+liberation_c4_mode false
+show_full_component_text false
+hack_election_status false
+cc_n_plastic_limit true
+bot_faction_reacts false
+bot_color_reacts false
+bot_strat_reacts false
+has_had_a_status_phase false
+bot_shushing false
+homebrew_sc_mode false
+inject_rules_links true
+spin_mode OFF
+show_unit_tags false
+show_owned_pns_in_player_area false
+ac_deck_id action_cards_pok
+so_deck_id secret_objectives_pok
+stage_1_public_deck_id public_stage_1_objectives_pok
+stage_2_public_deck_id public_stage_2_objectives_pok
+map_template null
+tech_deck_id techs_pok_c4
+relic_deck_id relics_pok_te
+agenda_deck_id agendas_pok
+event_deck_id 
+exploration_deck_id explores_pok
+bag_draft 
+game_tags 
+milty_draft_manager null
+draft_manager p:238955723462148106,u0|318177452767707148,u1|697658233355108364,u2|759362615230857256,u3|533058401882603530,u4
+milty_draft_settings {"draftMode":{"id":"DraftType","chosenKey":"milty"},"gameSettings":{"alliance":{"id":"Alliance","val":false},"decks":{"actionCards":{"id":"ACs","chosenKey":"action_cards_pok"},"agendas":{"id":"Agendas","chosenKey":"agendas_pok"},"explores":{"id":"Explores","chosenKey":"explores_pok"},"menuId":"decks","relics":{"id":"Relics","chosenKey":"relics_pok_te"},"secrets":{"id":"SecretDeck","chosenKey":"secret_objectives_pok"},"stage1":{"id":"Stg1Deck","chosenKey":"public_stage_1_objectives_pok"},"stage2":{"id":"Stg2Deck","chosenKey":"public_stage_2_objectives_pok"},"stratCards":{"id":"StratCards","chosenKey":"te"},"techs":{"id":"Techs","chosenKey":"techs_pok_c4"}},"mapTemplate":{"id":"Template","chosenKey":"5pHyperlanes"},"menuId":"game","nucleusTemplatePredicate":{},"pointTotal":{"id":"Points","val":10},"secrets":{"id":"Secrets","val":3},"stage1s":{"id":"Stage1s","val":5},"stage2s":{"id":"Stage2s","val":5},"tigl":{"id":"TIGL","val":false},"tiglFractured":{"id":"TIGL Fractured","val":false}},"menuId":"main","messageId":"1489589319000916069","playerSettings":{"banFactions":{"id":"BanFactions","keys":["mentak","yssaril"]},"gamePlayers":{"id":"Players","keys":["238955723462148106","318177452767707148","697658233355108364","759362615230857256","533058401882603530"]},"menuId":"players","presetDraftOrder":{"id":"StaticOrder","val":false},"priFactions":{"id":"PriFactions","keys":["firmament","crimson","deepwrought","ralnel","bastion"]}},"sliceSettings":{"extraWorms":{"id":"ExtraWH","val":true},"menuId":"slice","minimumInf":{"id":"MinInf","val":3},"minimumRes":{"id":"MinRes","val":2},"numFactions":{"id":"#Factions","val":9},"numLegends":{"id":"Legends","valLow":1,"valHigh":2},"numSlices":{"id":"#Slices","val":5},"presetSlices":null,"totalValue":{"id":"TotVal","valLow":9,"valHigh":13}},"sourceSettings":{"absol":{"id":"Absol","val":false},"actionCardDeck2":{"id":"ActionCardDeck2","val":false},"base":{"id":"BaseGame","val":true},"betaTestMode":{"id":"Beta","val":false},"codexes":{"id":"Codexes","val":true},"discoStars":{"id":"DiscoStars","val":false},"eronous":{"id":"Eronous","val":false},"ignis":{"id":"Ignis","val":false},"menuId":"source","pok":{"id":"PoK","val":true},"teDemo":{"id":"ThundersEdge","val":true},"unchartedSpace":{"id":"UnchartSpace","val":false}}}
+strategy_card_set te
+border_anomalies []
+game_has_ended false
+image_gen_count 0
+run_data_migrations 
+priority_track_mode NONE
+debt_pool 
+-endgameinfo-
+-playerinfo-
+-player-
+533058401882603530
+Lau
+faction null
+faction_emoji null
+faction_display_name null
+color null
+decal_set null
+stats_anchor_location null
+stats_tracked_user_id 533058401882603530
+stats_tracked_user_name lau2628
+hs_tile_position null
+alliance_members 
+roleForCommunity null
+playerPrivateChannel null
+fog_filter default
+passed false
+ready_to_pass_bag false
+auto_pass_whens_n_afters false
+search_warrant false
+dummy false
+npc false
+eliminated false
+notepad 
+has_found_cfrag false
+has_found_hfrag false
+has_found_ifrag false
+has_found_ufrag false
+ats_count 0
+pillage_count 0
+sarween_count 0
+ghost_commander_count 0
+magen_infantry_count 0
+path_token_count 0
+honor_count 0
+dishonor_count 0
+steelbalance_count 0
+starbalance_count 0
+harvest_count 0
+action_cards 
+events 
+promissory_notes 
+promissory_notes_owned 
+promissory_notes_play_area 
+units_owned 
+lizho_trap_cards 
+lizho_trap_planets 
+plot_cards 
+plot_factions 
+fragments 
+relics 
+exhausted_relics 
+mahact_cc 
+franken_bag_to_pass 
+franken_personal_bag 
+franken_items_to_draft 
+faction_tech 
+tech 
+spent_things 
+bombard_units 
+transaction_items 
+teammate_ids 533058401882603530
+tech_exhausted 
+tech_purged 
+planets 
+planets_exhausted 
+planets_ability_exhausted 
+tactical_cc 3
+fleet_cc 3
+strategy_cc 2
+abilities 
+trade_goods 0
+expected_hits_times_10 0
+total_expenses 0
+bonus_scored_secrets 0
+turn_count 0
+actual_hits 0
+stasis_infantry 0
+auto_sabo_pass_median 0
+capture 
+unit_cap 
+secret_objectives 
+produced_units 
+secret_objectives_scored 
+number_of_turns 0
+total_turn_time 0
+strategy_card 
+followed_sc 
+player_stored_values 
+breakthroughs 
+breakthrough_unl_map 
+breakthrough_exh_map 
+breakthrough_actv_map 
+breakthrough_tgs_map 
+leaders none
+fow_systems 
+cards_info_thread_channel_id 1489589148229697538
+draft_bag_info_thread_channel_id null
+PLAYER_NEW_TEMP_MODS 
+PLAYER_TEMP_MODS 
+commodities_total 0
+commodities_base 0
+commodities 0
+-endplayer-
+-player-
+318177452767707148
+baddie
+faction null
+faction_emoji null
+faction_display_name null
+color null
+decal_set null
+stats_anchor_location null
+stats_tracked_user_id 318177452767707148
+stats_tracked_user_name halfbaddie
+hs_tile_position null
+alliance_members 
+roleForCommunity null
+playerPrivateChannel null
+fog_filter default
+passed false
+ready_to_pass_bag false
+auto_pass_whens_n_afters false
+search_warrant false
+dummy false
+npc false
+eliminated false
+notepad 
+has_found_cfrag false
+has_found_hfrag false
+has_found_ifrag false
+has_found_ufrag false
+ats_count 0
+pillage_count 0
+sarween_count 0
+ghost_commander_count 0
+magen_infantry_count 0
+path_token_count 0
+honor_count 0
+dishonor_count 0
+steelbalance_count 0
+starbalance_count 0
+harvest_count 0
+action_cards 
+events 
+promissory_notes 
+promissory_notes_owned 
+promissory_notes_play_area 
+units_owned 
+lizho_trap_cards 
+lizho_trap_planets 
+plot_cards 
+plot_factions 
+fragments 
+relics 
+exhausted_relics 
+mahact_cc 
+franken_bag_to_pass 
+franken_personal_bag 
+franken_items_to_draft 
+faction_tech 
+tech 
+spent_things 
+bombard_units 
+transaction_items 
+teammate_ids 318177452767707148
+tech_exhausted 
+tech_purged 
+planets 
+planets_exhausted 
+planets_ability_exhausted 
+tactical_cc 3
+fleet_cc 3
+strategy_cc 2
+abilities 
+trade_goods 0
+expected_hits_times_10 0
+total_expenses 0
+bonus_scored_secrets 0
+turn_count 0
+actual_hits 0
+stasis_infantry 0
+auto_sabo_pass_median 0
+capture 
+unit_cap 
+secret_objectives 
+produced_units 
+secret_objectives_scored 
+number_of_turns 0
+total_turn_time 0
+strategy_card 
+followed_sc 
+player_stored_values 
+breakthroughs 
+breakthrough_unl_map 
+breakthrough_exh_map 
+breakthrough_actv_map 
+breakthrough_tgs_map 
+leaders none
+fow_systems 
+cards_info_thread_channel_id 1489589153128648848
+draft_bag_info_thread_channel_id null
+PLAYER_NEW_TEMP_MODS 
+PLAYER_TEMP_MODS 
+commodities_total 0
+commodities_base 0
+commodities 0
+-endplayer-
+-player-
+697658233355108364
+cliff
+faction null
+faction_emoji null
+faction_display_name null
+color null
+decal_set null
+stats_anchor_location null
+stats_tracked_user_id 697658233355108364
+stats_tracked_user_name cliffnz
+hs_tile_position null
+alliance_members 
+roleForCommunity null
+playerPrivateChannel null
+fog_filter default
+passed false
+ready_to_pass_bag false
+auto_pass_whens_n_afters false
+search_warrant false
+dummy false
+npc false
+eliminated false
+notepad 
+has_found_cfrag false
+has_found_hfrag false
+has_found_ifrag false
+has_found_ufrag false
+ats_count 0
+pillage_count 0
+sarween_count 0
+ghost_commander_count 0
+magen_infantry_count 0
+path_token_count 0
+honor_count 0
+dishonor_count 0
+steelbalance_count 0
+starbalance_count 0
+harvest_count 0
+action_cards 
+events 
+promissory_notes 
+promissory_notes_owned 
+promissory_notes_play_area 
+units_owned 
+lizho_trap_cards 
+lizho_trap_planets 
+plot_cards 
+plot_factions 
+fragments 
+relics 
+exhausted_relics 
+mahact_cc 
+franken_bag_to_pass 
+franken_personal_bag 
+franken_items_to_draft 
+faction_tech 
+tech 
+spent_things 
+bombard_units 
+transaction_items 
+teammate_ids 697658233355108364
+tech_exhausted 
+tech_purged 
+planets 
+planets_exhausted 
+planets_ability_exhausted 
+tactical_cc 3
+fleet_cc 3
+strategy_cc 2
+abilities 
+trade_goods 0
+expected_hits_times_10 0
+total_expenses 0
+bonus_scored_secrets 0
+turn_count 0
+actual_hits 0
+stasis_infantry 0
+auto_sabo_pass_median 0
+capture 
+unit_cap 
+secret_objectives 
+produced_units 
+secret_objectives_scored 
+number_of_turns 0
+total_turn_time 0
+strategy_card 
+followed_sc 
+player_stored_values 
+breakthroughs 
+breakthrough_unl_map 
+breakthrough_exh_map 
+breakthrough_actv_map 
+breakthrough_tgs_map 
+leaders none
+fow_systems 
+cards_info_thread_channel_id 1489589158019334286
+draft_bag_info_thread_channel_id null
+PLAYER_NEW_TEMP_MODS 
+PLAYER_TEMP_MODS 
+commodities_total 0
+commodities_base 0
+commodities 0
+-endplayer-
+-player-
+759362615230857256
+palangi
+faction null
+faction_emoji null
+faction_display_name null
+color null
+decal_set null
+stats_anchor_location null
+stats_tracked_user_id 759362615230857256
+stats_tracked_user_name oldpalangi
+hs_tile_position null
+alliance_members 
+roleForCommunity null
+playerPrivateChannel null
+fog_filter default
+passed false
+ready_to_pass_bag false
+auto_pass_whens_n_afters false
+search_warrant false
+dummy false
+npc false
+eliminated false
+notepad 
+has_found_cfrag false
+has_found_hfrag false
+has_found_ifrag false
+has_found_ufrag false
+ats_count 0
+pillage_count 0
+sarween_count 0
+ghost_commander_count 0
+magen_infantry_count 0
+path_token_count 0
+honor_count 0
+dishonor_count 0
+steelbalance_count 0
+starbalance_count 0
+harvest_count 0
+action_cards 
+events 
+promissory_notes 
+promissory_notes_owned 
+promissory_notes_play_area 
+units_owned 
+lizho_trap_cards 
+lizho_trap_planets 
+plot_cards 
+plot_factions 
+fragments 
+relics 
+exhausted_relics 
+mahact_cc 
+franken_bag_to_pass 
+franken_personal_bag 
+franken_items_to_draft 
+faction_tech 
+tech 
+spent_things 
+bombard_units 
+transaction_items 
+teammate_ids 759362615230857256
+tech_exhausted 
+tech_purged 
+planets 
+planets_exhausted 
+planets_ability_exhausted 
+tactical_cc 3
+fleet_cc 3
+strategy_cc 2
+abilities 
+trade_goods 0
+expected_hits_times_10 0
+total_expenses 0
+bonus_scored_secrets 0
+turn_count 0
+actual_hits 0
+stasis_infantry 0
+auto_sabo_pass_median 0
+capture 
+unit_cap 
+secret_objectives 
+produced_units 
+secret_objectives_scored 
+number_of_turns 0
+total_turn_time 0
+strategy_card 
+followed_sc 
+player_stored_values 
+breakthroughs 
+breakthrough_unl_map 
+breakthrough_exh_map 
+breakthrough_actv_map 
+breakthrough_tgs_map 
+leaders none
+fow_systems 
+cards_info_thread_channel_id 1489589163077402744
+draft_bag_info_thread_channel_id null
+PLAYER_NEW_TEMP_MODS 
+PLAYER_TEMP_MODS 
+commodities_total 0
+commodities_base 0
+commodities 0
+-endplayer-
+-player-
+238955723462148106
+BelaGuez
+faction null
+faction_emoji null
+faction_display_name null
+color null
+decal_set null
+stats_anchor_location null
+stats_tracked_user_id 238955723462148106
+stats_tracked_user_name belaguez
+hs_tile_position null
+alliance_members 
+roleForCommunity null
+playerPrivateChannel null
+fog_filter default
+passed false
+ready_to_pass_bag false
+auto_pass_whens_n_afters false
+search_warrant false
+dummy false
+npc false
+eliminated false
+notepad 
+has_found_cfrag false
+has_found_hfrag false
+has_found_ifrag false
+has_found_ufrag false
+ats_count 0
+pillage_count 0
+sarween_count 0
+ghost_commander_count 0
+magen_infantry_count 0
+path_token_count 0
+honor_count 0
+dishonor_count 0
+steelbalance_count 0
+starbalance_count 0
+harvest_count 0
+action_cards 
+events 
+promissory_notes 
+promissory_notes_owned 
+promissory_notes_play_area 
+units_owned 
+lizho_trap_cards 
+lizho_trap_planets 
+plot_cards 
+plot_factions 
+fragments 
+relics 
+exhausted_relics 
+mahact_cc 
+franken_bag_to_pass 
+franken_personal_bag 
+franken_items_to_draft 
+faction_tech 
+tech 
+spent_things 
+bombard_units 
+transaction_items 
+teammate_ids 238955723462148106
+tech_exhausted 
+tech_purged 
+planets 
+planets_exhausted 
+planets_ability_exhausted 
+tactical_cc 3
+fleet_cc 3
+strategy_cc 2
+abilities 
+trade_goods 0
+expected_hits_times_10 0
+total_expenses 0
+bonus_scored_secrets 0
+turn_count 0
+actual_hits 0
+stasis_infantry 0
+auto_sabo_pass_median 0
+capture 
+unit_cap 
+secret_objectives 
+produced_units 
+secret_objectives_scored 
+number_of_turns 0
+total_turn_time 0
+strategy_card 
+followed_sc 
+player_stored_values 
+breakthroughs 
+breakthrough_unl_map 
+breakthrough_exh_map 
+breakthrough_actv_map 
+breakthrough_tgs_map 
+leaders none
+fow_systems 
+cards_info_thread_channel_id null
+draft_bag_info_thread_channel_id null
+PLAYER_NEW_TEMP_MODS 
+PLAYER_TEMP_MODS 
+commodities_total 0
+commodities_base 0
+commodities 0
+-endplayer-
+-endplayerinfo-
+-endmapinfo-

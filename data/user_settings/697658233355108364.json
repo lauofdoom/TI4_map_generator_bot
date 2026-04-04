@@ -1,6 +1,6 @@
 {
-  "userId" : "533058401882603530",
-  "activeHours" : "0;17;23;5;43;39;32;12;69;68;150;91;0;0;0;0;0;0;0;0;0;28;2;11",
+  "userId" : "697658233355108364",
+  "activeHours" : "0;0;0;0;0;0;0;0;2;2;0;0;0;0;0;0;0;0;0;0;0;2;0;0",
   "activityTracking" : true,
   "afkHours" : null,
   "autoNoSaboInterval" : 0,
@@ -20,7 +20,7 @@
   "prefersPrePassOnSC" : true,
   "prefersSarweenMsg" : true,
   "prefersWrongButtonEphemeral" : null,
-  "sandbagPref" : "bot",
+  "sandbagPref" : "No Preference",
   "showTransactables" : false,
   "supportPref" : "No Preference",
   "takebackPref" : "No Preference",
