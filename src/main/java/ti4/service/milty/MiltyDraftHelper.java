@@ -60,7 +60,10 @@ public class MiltyDraftHelper {
         MapTemplateModel mapTemplate = Mapper.getMapTemplate(manager.getMapTemplate());
 
         int sliceCount = slices.size();
-        if (sliceCount == 0) return FileUploadService.createFileUpload(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), game.getName() + "_miltydraft");
+        if (sliceCount == 0) {
+            return FileUploadService.createFileUpload(
+                    new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), game.getName() + "_miltydraft");
+        }
         int spanW = (int) Math.ceil(Math.sqrt(sliceCount));
         int spanH = (sliceCount + spanW - 1) / spanW;
 

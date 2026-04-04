@@ -612,12 +612,9 @@ public class MiltyDraftManager {
 
     public void loadSuperSaveString(String saveString) throws Exception {
         // Use split with -1 limit to preserve empty fields (StringTokenizer skips them)
+        // Valid formats: 5 parts (current) or 6 parts (legacy with deprecated message IDs)
         String[] parts = saveString.split("\\|", -1);
-        if (parts.length == 5) {
-            // current format: slices|factions|players|picks|template
-        } else if (parts.length == 6) {
-            // legacy format with message IDs (deprecated)
-        } else {
+        if (parts.length != 5 && parts.length != 6) {
             throw new Exception("Bad milty draft save string: " + saveString);
         }
 
@@ -627,12 +624,14 @@ public class MiltyDraftManager {
 
         // Factions
         String factionStr = parts[1];
-        List<String> factions = factionStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(factionStr.split(",")));
+        List<String> factions =
+                factionStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(factionStr.split(",")));
         setFactionDraft(factions);
 
         // Players
         String playersStr = parts[2];
-        List<String> players = playersStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(playersStr.split(",")));
+        List<String> players =
+                playersStr.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(playersStr.split(",")));
         List<String> playersReversed = new ArrayList<>(players);
         Collections.reverse(playersReversed);
         List<String> draftOrder = new ArrayList<>(players);
